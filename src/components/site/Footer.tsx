@@ -1,51 +1,38 @@
+import { Link } from "@tanstack/react-router";
+
 export function Footer() {
   return (
     <footer className="bg-ivory px-4 py-20">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <span className="grid h-8 w-8 place-items-center rounded-full bg-navy text-xs font-semibold text-gold">G</span>
               <span className="font-display text-2xl text-navy">Giftitude</span>
-            </div>
+            </Link>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-navy/70">
               A premium corporate gifting house, curating considered objects
               for India's most discerning brands since 2017.
             </p>
-
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="mt-8 flex items-center rounded-full border bg-white p-1.5 shadow-soft hairline"
-            >
-              <input
-                type="email"
-                required
-                placeholder="Your work email"
-                className="flex-1 bg-transparent px-5 py-2 text-sm text-navy placeholder:text-navy/40 focus:outline-none"
-              />
-              <button className="rounded-full bg-navy px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-gold transition-colors hover:bg-navy-soft">
-                Subscribe
-              </button>
-            </form>
           </div>
 
           <div className="grid grid-cols-2 gap-8 lg:col-span-7 lg:grid-cols-3">
             <div>
               <div className="text-xs uppercase tracking-[0.22em] text-navy/55">Studio</div>
               <ul className="mt-5 space-y-3 text-sm text-navy">
-                <li>About</li>
-                <li>Atelier</li>
-                <li>Press</li>
-                <li>Careers</li>
+                <li><Link to="/about" className="hover:text-gold">About us</Link></li>
+                <li><Link to="/products" className="hover:text-gold">Catalogue</Link></li>
+                <li><Link to="/contact" className="hover:text-gold">Contact</Link></li>
               </ul>
             </div>
             <div>
               <div className="text-xs uppercase tracking-[0.22em] text-navy/55">Catalogue</div>
               <ul className="mt-5 space-y-3 text-sm text-navy">
-                <li>Gift sets</li>
-                <li>Diaries</li>
-                <li>Lamps</li>
-                <li>Accessories</li>
+                <li><Link to="/products" hash="gift-sets" className="hover:text-gold">Gift sets</Link></li>
+                <li><Link to="/products" hash="diary-power" className="hover:text-gold">Diary & Power</Link></li>
+                <li><Link to="/products" hash="lamps" className="hover:text-gold">Lamps</Link></li>
+                <li><Link to="/products" hash="bottles" className="hover:text-gold">Bottles & Mugs</Link></li>
+                <li><Link to="/products" hash="accessories" className="hover:text-gold">Accessories</Link></li>
               </ul>
             </div>
             <div>
