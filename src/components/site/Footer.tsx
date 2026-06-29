@@ -28,11 +28,11 @@ export function Footer() {
             <div>
               <div className="text-xs uppercase tracking-[0.22em] text-navy/55">Catalogue</div>
               <ul className="mt-5 space-y-3 text-sm text-navy">
-                <li><Link to="/products" hash="gift-sets" className="hover:text-gold">Gift sets</Link></li>
-                <li><Link to="/products" hash="diary-power" className="hover:text-gold">Diary & Power</Link></li>
-                <li><Link to="/products" hash="lamps" className="hover:text-gold">Lamps</Link></li>
-                <li><Link to="/products" hash="bottles" className="hover:text-gold">Bottles & Mugs</Link></li>
-                <li><Link to="/products" hash="accessories" className="hover:text-gold">Accessories</Link></li>
+                <li><Link to="/products/$category" params={{ category: "gift-sets" }} className="hover:text-gold">Gift sets</Link></li>
+                <li><Link to="/products/$category" params={{ category: "diary-power" }} className="hover:text-gold">Diary & Power</Link></li>
+                <li><Link to="/products/$category" params={{ category: "lamps" }} className="hover:text-gold">Lamps</Link></li>
+                <li><Link to="/products/$category" params={{ category: "bottles" }} className="hover:text-gold">Bottles & Mugs</Link></li>
+                <li><Link to="/products/$category" params={{ category: "accessories" }} className="hover:text-gold">Accessories</Link></li>
               </ul>
             </div>
             <div>
