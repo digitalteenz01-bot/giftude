@@ -39,8 +39,8 @@ export function Categories() {
           {cats.map((c) => (
             <Link
               key={c.title}
-              to="/products"
-              hash={c.hash}
+              to="/products/$category"
+              params={{ category: c.slug }}
               className={`group relative overflow-hidden rounded-[1.75rem] bg-white shadow-soft transition-all duration-500 hover:shadow-luxury ${c.span}`}
             >
               <div className="absolute inset-0">
