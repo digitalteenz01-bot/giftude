@@ -5,14 +5,15 @@ import lamps from "@/assets/cat-lamps.jpg";
 import bottles from "@/assets/cat-bottles.jpg";
 import accessories from "@/assets/cat-accessories.jpg";
 
-type Cat = { title: string; desc: string; img: string; alt: string; span: string; hash: string };
+type CatSlug = "gift-sets" | "diary-power" | "lamps" | "bottles" | "accessories";
+type Cat = { title: string; desc: string; img: string; alt: string; span: string; slug: CatSlug };
 
 const cats: Cat[] = [
-  { title: "Premium Gift Sets", desc: "Curated boxes built around a single object of joy.", img: gifts, alt: "Navy leather presentation box with pen and silk", span: "lg:col-span-7 lg:row-span-2", hash: "gift-sets" },
-  { title: "Diary & Power Banks", desc: "Leather, brass and battery in one pocket.", img: diary, alt: "Leather diary with matte power bank", span: "lg:col-span-5", hash: "diary-power" },
-  { title: "Lamps", desc: "Sculpture, warmth, presence.", img: lamps, alt: "Sculptural brass and navy desk lamp", span: "lg:col-span-3", hash: "lamps" },
-  { title: "Bottles & Mugs", desc: "Daily rituals, considered.", img: bottles, alt: "Matte navy bottle with ivory and gold mug", span: "lg:col-span-2", hash: "bottles" },
-  { title: "Accessories", desc: "The small things gifted with intention.", img: accessories, alt: "Leather cardholder, brass keychain and silk tie", span: "lg:col-span-5", hash: "accessories" },
+  { title: "Premium Gift Sets", desc: "Curated boxes built around a single object of joy.", img: gifts, alt: "Navy leather presentation box with pen and silk", span: "lg:col-span-7 lg:row-span-2", slug: "gift-sets" },
+  { title: "Diary & Power Banks", desc: "Leather, brass and battery in one pocket.", img: diary, alt: "Leather diary with matte power bank", span: "lg:col-span-5", slug: "diary-power" },
+  { title: "Lamps", desc: "Sculpture, warmth, presence.", img: lamps, alt: "Sculptural brass and navy desk lamp", span: "lg:col-span-3", slug: "lamps" },
+  { title: "Bottles & Mugs", desc: "Daily rituals, considered.", img: bottles, alt: "Matte navy bottle with ivory and gold mug", span: "lg:col-span-2", slug: "bottles" },
+  { title: "Accessories", desc: "The small things gifted with intention.", img: accessories, alt: "Leather cardholder, brass keychain and silk tie", span: "lg:col-span-5", slug: "accessories" },
 ];
 
 export function Categories() {
