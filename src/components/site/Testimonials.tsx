@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { Star } from "lucide-react";
+import testiBanner from "@/assets/testi-banner.webp";
+import { useState, useEffect } from "react";
 
 const items = [
   {
@@ -21,48 +23,88 @@ const items = [
   },
 ];
 
+// Duplicate items to allow smooth sliding showing 2 at a time
+const sliderItems = [...items, ...items];
+
 export function Testimonials() {
-  const [i, setI] = useState(0);
-  const t = items[i];
+  const [index, setIndex] = useState(0);
+
+  // Auto-advance slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % items.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="bg-ivory px-4 py-24">
-      <div className="mx-auto max-w-6xl">
-        <div className="text-xs uppercase tracking-[0.24em] text-gold">In their words</div>
-        <div className="mt-8 grid gap-10 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-9">
-            <div className="font-display text-[7rem] leading-none text-gold/40">"</div>
-            <blockquote className="-mt-12 font-display text-3xl leading-snug text-navy sm:text-4xl lg:text-5xl">
-              {t.quote}
-            </blockquote>
-            <div className="mt-8 flex items-center gap-4">
-              <div className="h-px w-14 bg-navy" />
-              <div>
-                <div className="font-medium text-navy">{t.author}</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-navy/55">
-                  {t.role}
+    <section 
+      className="relative isolate w-full bg-cover bg-center py-12 sm:py-20"
+      style={{ backgroundImage: `url("${testiBanner}")` }}
+    >
+      <div className="absolute inset-0 -z-10 bg-white/40" />
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-gold">
+            In their words
+          </div>
+          <h2 className="mt-4 font-display text-4xl leading-[1.1] text-navy sm:text-5xl">
+            Trusted by the <span className="text-gold">best.</span>
+          </h2>
+        </div>
+        
+        {/* Slider Container */}
+        <div className="mt-16 overflow-hidden [--items-to-show:1] lg:[--items-to-show:2]">
+          <div 
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(calc(-100% * ${index} / var(--items-to-show)))` }}
+          >
+            {sliderItems.map((t, i) => (
+              <div 
+                key={i}
+                className="w-full shrink-0 basis-full px-3 lg:basis-1/2"
+              >
+                <div className="flex h-full flex-col justify-between rounded-[2rem] bg-white p-8 shadow-soft sm:p-10">
+                  <div>
+                    <div className="mb-6 flex gap-1 text-gold">
+                      {[...Array(5)].map((_, j) => (
+                        <Star key={j} className="h-4 w-4 fill-current" />
+                      ))}
+                    </div>
+                    <blockquote className="font-display text-lg leading-relaxed text-navy sm:text-xl">
+                      "{t.quote}"
+                    </blockquote>
+                  </div>
+                  
+                  <div className="mt-10 flex items-center gap-4 border-t border-navy/5 pt-6">
+                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-navy/5 font-display text-lg text-gold">
+                      {t.author.charAt(0)}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-navy">{t.author}</div>
+                      <div className="mt-1 text-[10px] font-medium uppercase tracking-[0.2em] text-navy/60">
+                        {t.role}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2 lg:col-span-3 lg:justify-end">
-            {items.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setI(idx)}
-                aria-label={`Show testimonial ${idx + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  idx === i ? "w-10 bg-navy" : "w-2 bg-navy/25 hover:bg-navy/50"
-                }`}
-              />
             ))}
-            <button
-              onClick={() => setI((i + 1) % items.length)}
-              className="ml-3 grid h-11 w-11 place-items-center rounded-full bg-navy text-gold transition-transform hover:rotate-12"
-              aria-label="Next testimonial"
-            >
-              →
-            </button>
           </div>
+        </div>
+
+        {/* Dots Pagination */}
+        <div className="mt-10 flex justify-center gap-3">
+          {items.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                index === i ? "w-8 bg-gold" : "w-2.5 bg-navy/20 hover:bg-navy/40"
+              }`}
+              aria-label={`Go to testimonial ${i + 1}`}
+            />
+          ))}
         </div>
       </div>
     </section>

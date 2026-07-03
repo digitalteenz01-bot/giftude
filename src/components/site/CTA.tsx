@@ -1,4 +1,5 @@
 import cta from "@/assets/cta-gift.jpg";
+import { ArrowRight } from "lucide-react";
 
 export function CTA() {
   return (
@@ -23,11 +24,11 @@ export function CTA() {
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <a
                 href="mailto:hello@giftitude.in"
-                className="group inline-flex items-center gap-3 rounded-full bg-gold px-8 py-4 text-sm font-semibold text-navy transition-all hover:bg-gold-soft"
+                className="group inline-flex items-center gap-4 rounded-full bg-gold pl-8 pr-2.5 py-2.5 text-sm font-semibold text-navy transition-all hover:bg-gold-soft"
               >
                 Start a quotation
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-navy text-gold transition-transform group-hover:rotate-45">
-                  ↗
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy text-gold transition-transform group-hover:translate-x-1 font-bold text-lg">
+                  <ArrowRight strokeWidth={2.5} size={20} />
                 </span>
               </a>
               <a href="tel:+912200000000" className="text-sm text-ivory/80 underline-offset-4 hover:underline">

@@ -22,17 +22,29 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+import bg2 from "@/assets/background2.webp";
+
+import { FadeIn } from "@/components/ui/FadeIn";
+
 function Index() {
   return (
     <div className="min-h-screen bg-white text-ink">
       <Nav />
       <main>
         <Hero />
-        <TrustStrip />
-        <Categories />
-        <WhyUs />
-        <Testimonials />
-        <HomeCTA />
+        <div className="relative isolate flex flex-col bg-ivory pb-12 sm:pb-20">
+          <div 
+            className="absolute inset-0 -z-10 bg-fixed bg-cover bg-center opacity-30"
+            style={{ backgroundImage: `url(${bg2})` }}
+          />
+          <div className="flex flex-col">
+            <FadeIn><TrustStrip /></FadeIn>
+            <FadeIn delay={100}><Categories /></FadeIn>
+          </div>
+          <FadeIn><WhyUs /></FadeIn>
+          <FadeIn><Testimonials /></FadeIn>
+          <FadeIn><HomeCTA /></FadeIn>
+        </div>
       </main>
       <Footer />
     </div>

@@ -1,9 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
-import cta from "@/assets/cta-gift.jpg";
+import { ArrowRight } from "lucide-react";
+import testiBanner from "@/assets/testi-banner.webp";
 
 const searchSchema = z.object({
   product: z.string().optional(),
@@ -15,9 +16,6 @@ export const Route = createFileRoute("/contact")({
     meta: [
       { title: "Contact — Begin a Brief with Giftitude" },
       { name: "description", content: "Begin a brief with the Giftitude studio. A curator replies within one working day with a tailored corporate gifting proposal." },
-      { property: "og:title", content: "Contact — Begin a Brief with Giftitude" },
-      { property: "og:description", content: "Begin a corporate gifting brief. We reply within one working day." },
-      { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],
   }),
@@ -25,12 +23,12 @@ export const Route = createFileRoute("/contact")({
 });
 
 const CATEGORIES = [
-  { value: "gift-sets", label: "Premium Gift Sets" },
+  { value: "gift-sets",    label: "Premium Gift Sets" },
   { value: "diary-power", label: "Diary & Power Banks" },
-  { value: "lamps", label: "Lamps" },
-  { value: "bottles", label: "Bottles & Mugs" },
+  { value: "lamps",       label: "Lamps" },
+  { value: "bottles",     label: "Bottles & Mugs" },
   { value: "accessories", label: "Accessories" },
-  { value: "custom", label: "Custom / Not sure yet" },
+  { value: "custom",      label: "Custom / Not sure yet" },
 ];
 
 function inferCategory(product?: string): string {
@@ -44,207 +42,244 @@ function inferCategory(product?: string): string {
   return "gift-sets";
 }
 
+// ─── Page ─────────────────────────────────────────────────────────────────────
 function ContactPage() {
   const { product } = Route.useSearch();
 
   return (
-    <div className="min-h-screen bg-white text-ink">
-      <Nav />
-      <main className="pt-24 lg:pt-28">
-        <div className="grid lg:min-h-[calc(100vh-7rem)] lg:grid-cols-5">
-          <ContactPanel />
-          <EnquiryForm productSlug={product} />
+    <div
+      className="min-h-screen bg-ivory text-ink"
+      style={{
+        backgroundImage: `url(${testiBanner})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+      }}
+    >
+      <div className="min-h-screen bg-white/88">
+      <Nav variant="light" />
+      <main className="mx-auto max-w-3xl px-6 pb-24 pt-32 lg:px-8 lg:pt-36">
+
+        {/* ── Page header ── */}
+        <div className="mb-12 border-b border-navy/8 pb-10">
+          <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-gold">
+            Begin a brief
+          </div>
+          <h1 className="mt-4 font-display text-4xl leading-[1.06] text-navy sm:text-5xl">
+            Let's design something memorable.
+          </h1>
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-navy/55">
+            Share the occasion, the count, and a sense of the recipient.
+            A curator will reply within one working day with a tailored proposal.
+          </p>
+          <div className="mt-5 flex items-center gap-2.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
+            <span className="text-xs text-navy/45">Reply within 1 working day</span>
+          </div>
         </div>
+
+        {/* ── Form ── */}
+        <ContactForm productSlug={product} />
+
+        {/* ── Contact details strip ── */}
+        <div className="mt-16 grid gap-6 border-t border-navy/8 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+          {[
+            { label: "Email",  value: "hello@giftitude.in",  href: "mailto:hello@giftitude.in" },
+            { label: "Phone",  value: "+91 22 0000 0000",     href: "tel:+912200000000" },
+            { label: "Studio", value: "Lower Parel, Mumbai",  href: null },
+            { label: "Hours",  value: "Mon – Sat · 10–19 IST", href: null },
+          ].map(({ label, value, href }) => (
+            <div key={label}>
+              <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-navy/35">
+                {label}
+              </div>
+              {href ? (
+                <a href={href} className="mt-1 block text-sm text-navy/70 transition-colors hover:text-gold">
+                  {value}
+                </a>
+              ) : (
+                <p className="mt-1 text-sm text-navy/70">{value}</p>
+              )}
+            </div>
+          ))}
+        </div>
+
       </main>
+      </div>
       <Footer />
     </div>
   );
 }
 
-function ContactPanel() {
-  return (
-    <aside className="relative overflow-hidden bg-navy px-6 py-16 text-ivory sm:px-10 lg:col-span-2 lg:px-14 lg:py-20">
-      <div className="pointer-events-none absolute -left-32 -top-32 h-[500px] w-[500px] rounded-full opacity-50 blur-3xl"
-           style={{ background: "radial-gradient(circle, oklch(0.71 0.13 78 / 0.35), transparent 60%)" }} />
-      <div className="relative lg:sticky lg:top-32">
-        <div className="text-[11px] uppercase tracking-[0.3em] text-gold">Begin a brief</div>
-        <h1 className="mt-5 font-display text-5xl leading-[1.05] sm:text-6xl">
-          Let's design <br />
-          <span className="italic">something memorable</span>.
-        </h1>
-
-        <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-gold/40 px-4 py-2 text-xs uppercase tracking-[0.2em] text-gold">
-          <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
-          Reply within 1 working day
-        </div>
-
-        <dl className="mt-12 space-y-6 text-sm">
-          <div>
-            <dt className="text-[10px] uppercase tracking-[0.25em] text-ivory/55">Email</dt>
-            <dd className="mt-1 font-display text-xl"><a href="mailto:hello@giftitude.in" className="hover:text-gold">hello@giftitude.in</a></dd>
-          </div>
-          <div>
-            <dt className="text-[10px] uppercase tracking-[0.25em] text-ivory/55">Phone</dt>
-            <dd className="mt-1 font-display text-xl"><a href="tel:+912200000000" className="hover:text-gold">+91 22 0000 0000</a></dd>
-          </div>
-          <div>
-            <dt className="text-[10px] uppercase tracking-[0.25em] text-ivory/55">Studio</dt>
-            <dd className="mt-1 text-ivory/85">Unit 4, Mathuradas Mill,<br />Lower Parel, Mumbai 400013</dd>
-          </div>
-          <div>
-            <dt className="text-[10px] uppercase tracking-[0.25em] text-ivory/55">Hours</dt>
-            <dd className="mt-1 text-ivory/85">Mon — Sat · 10:00 to 19:00 IST</dd>
-          </div>
-        </dl>
-
-        <div className="mt-10 flex items-center gap-5 text-xs uppercase tracking-[0.2em] text-ivory/60">
-          <a href="#" className="hover:text-gold">Instagram</a>
-          <span className="h-px w-6 bg-ivory/30" />
-          <a href="#" className="hover:text-gold">LinkedIn</a>
-        </div>
-
-        <div className="mt-14 hidden lg:block">
-          <div className="ml-auto h-40 w-40 overflow-hidden rounded-2xl shadow-luxury animate-float">
-            <img src={cta} alt="Navy gift box" loading="lazy" className="h-full w-full object-cover" />
-          </div>
-        </div>
-      </div>
-    </aside>
-  );
-}
-
-function EnquiryForm({ productSlug }: { productSlug?: string }) {
+// ─── Form ─────────────────────────────────────────────────────────────────────
+function ContactForm({ productSlug }: { productSlug?: string }) {
   const [category, setCategory] = useState(inferCategory(productSlug));
   const [qty, setQty] = useState(100);
   const [sent, setSent] = useState(false);
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const name = String(f.get("name") || "");
-    const company = String(f.get("company") || "");
-    const email = String(f.get("email") || "");
-    const phone = String(f.get("phone") || "");
-    const message = String(f.get("message") || "");
+    const f        = new FormData(e.currentTarget);
+    const name     = String(f.get("name")    ?? "");
+    const company  = String(f.get("company") ?? "");
+    const email    = String(f.get("email")   ?? "");
+    const phone    = String(f.get("phone")   ?? "");
+    const message  = String(f.get("message") ?? "");
     const catLabel = CATEGORIES.find((c) => c.value === category)?.label ?? category;
-    const subject = `New enquiry — ${catLabel}`;
-    const body = [
-      `Name: ${name}`,
-      `Company: ${company}`,
-      `Email: ${email}`,
-      `Phone: ${phone}`,
-      `Category: ${catLabel}`,
-      `Quantity: ~${qty}`,
-      productSlug ? `Interested in: ${productSlug}` : null,
-      "",
-      "Message:",
+
+    const text = [
+      `*New Enquiry — Giftitude*`,
+      ``,
+      `*Name:* ${name}`,
+      `*Company:* ${company}`,
+      `*Email:* ${email}`,
+      `*Phone:* ${phone}`,
+      `*Category:* ${catLabel}`,
+      `*Quantity:* ~${qty}`,
+      productSlug ? `*Interested in:* ${productSlug}` : null,
+      ``,
+      `*Message:*`,
       message,
     ].filter(Boolean).join("\n");
-    window.location.href = `mailto:hello@giftitude.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    // Replace with your WhatsApp business number (digits only, with country code)
+    const waNumber = "919200000000";
+    window.open(
+      `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
     setSent(true);
   }
 
   return (
-    <section className="bg-ivory px-6 py-16 sm:px-10 lg:col-span-3 lg:px-16 lg:py-20">
-      <div className="mx-auto max-w-xl">
-        <div className="text-[11px] uppercase tracking-[0.3em] text-gold">Enquiry · 01</div>
-        <h2 className="mt-3 font-display text-3xl text-navy sm:text-4xl">Tell us about the brief.</h2>
-        <p className="mt-3 text-sm text-navy/70">
-          A few details are enough. A curator will reply with a tailored proposal.
-        </p>
+    <div>
 
         {productSlug && (
-          <div className="mt-6 inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1.5 text-xs text-navy hairline">
-            Interested in <span className="font-semibold">{productSlug}</span>
-          </div>
+          <p className="mb-6 text-sm text-navy/60">
+            Interested in: <span className="font-semibold text-navy">{productSlug}</span>
+          </p>
         )}
 
-        <form onSubmit={onSubmit} className="mt-8 space-y-5">
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Your name" name="name" required />
-            <Field label="Company" name="company" required />
-            <Field label="Work email" name="email" type="email" required />
-            <Field label="Phone" name="phone" type="tel" />
+        <form onSubmit={onSubmit} className="space-y-6">
+
+          {/* Row 1 */}
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Field label="Your name *"  name="name"    required />
+            <Field label="Company *"    name="company" required />
           </div>
 
+          {/* Row 2 */}
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Field label="Work email *" name="email" type="email" required />
+            <Field label="Phone"        name="phone" type="tel" />
+          </div>
+
+          {/* Category */}
           <div>
             <Label>Category</Label>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {CATEGORIES.map((c) => {
-                const active = c.value === category;
-                return (
-                  <button
-                    type="button"
-                    key={c.value}
-                    onClick={() => setCategory(c.value)}
-                    className={`rounded-full border px-4 py-2 text-xs transition-colors hairline ${
-                      active ? "border-navy bg-navy text-ivory" : "bg-white text-navy hover:border-gold"
-                    }`}
-                  >
-                    {c.label}
-                  </button>
-                );
-              })}
+            <div className="mt-3 flex flex-wrap gap-2">
+              {CATEGORIES.map((c) => (
+                <button
+                  key={c.value}
+                  type="button"
+                  onClick={() => setCategory(c.value)}
+                  className={`rounded-full border px-4 py-2 text-xs font-medium transition-all ${
+                    c.value === category
+                      ? "border-navy bg-navy text-white"
+                      : "border-navy/12 bg-white text-navy/60 hover:border-navy/30 hover:text-navy"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
             </div>
           </div>
 
+          {/* Quantity */}
           <div>
-            <Label>Approximate quantity · {qty}</Label>
+            <div className="flex items-center justify-between">
+              <Label>Approximate quantity</Label>
+              <span className="text-sm font-semibold text-navy">{qty}</span>
+            </div>
             <input
               type="range"
-              min={25}
-              max={2500}
-              step={25}
+              min={25} max={2500} step={25}
               value={qty}
               onChange={(e) => setQty(Number(e.target.value))}
-              className="mt-3 w-full accent-[var(--gold)]"
+              className="mt-3 w-full cursor-pointer accent-[var(--gold)]"
             />
-            <div className="mt-1 flex justify-between text-[10px] uppercase tracking-[0.2em] text-navy/55">
-              <span>25</span><span>2,500+</span>
+            <div className="mt-1.5 flex justify-between text-[10px] text-navy/35">
+              <span>25</span>
+              <span>2,500+</span>
             </div>
           </div>
 
+          {/* Message */}
           <div>
-            <Label>Message</Label>
+            <Label>Message *</Label>
             <textarea
               name="message"
               rows={5}
               required
               placeholder="Occasion, timeline, recipients, any thoughts on tone…"
-              className="mt-2 w-full rounded-2xl border bg-white px-4 py-3 text-sm text-navy placeholder:text-navy/40 focus:border-gold focus:outline-none hairline"
+              className="mt-3 w-full resize-none rounded-2xl border border-navy/12 bg-white px-5 py-4 text-sm text-navy placeholder:text-navy/30 transition-colors focus:border-navy/40 focus:outline-none"
             />
           </div>
 
-          <button
-            type="submit"
-            className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-navy px-8 py-4 text-sm font-semibold text-ivory transition-all hover:bg-navy-soft sm:w-auto"
-          >
-            {sent ? "Re-open mail draft" : "Send enquiry"}
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-gold text-navy transition-transform group-hover:rotate-45">↗</span>
-          </button>
+          {/* Submit */}
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <button
+              type="submit"
+              className="group inline-flex items-center gap-4 rounded-full bg-navy pl-7 pr-2 py-2 text-sm font-semibold text-white transition-all hover:bg-navy-soft"
+            >
+              {sent ? "Re-open on WhatsApp" : "Send enquiry"}
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold text-navy font-bold transition-transform group-hover:translate-x-1">
+                <ArrowRight strokeWidth={2.5} size={16} />
+              </span>
+            </button>
+            <Link
+              to="/products"
+              className="text-sm text-navy/45 underline-offset-4 hover:underline hover:text-navy transition-colors"
+            >
+              or browse the catalogue
+            </Link>
+          </div>
 
-          <p className="text-[11px] text-navy/55">
-            We don't store form inputs. Submitting opens your mail client with the brief pre-filled.
+          <p className="text-xs text-navy/35">
+            Submitting opens WhatsApp with the brief pre-filled. We don't store form data.
           </p>
+
         </form>
-      </div>
-    </section>
+    </div>
   );
 }
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 function Label({ children }: { children: React.ReactNode }) {
-  return <div className="text-[10px] uppercase tracking-[0.25em] text-navy/60">{children}</div>;
+  return (
+    <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-navy/45">
+      {children}
+    </div>
+  );
 }
 
-function Field({ label, name, type = "text", required }: { label: string; name: string; type?: string; required?: boolean }) {
+function Field({
+  label, name, type = "text", required,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+}) {
   return (
     <label className="block">
-      <Label>{label}{required && <span className="text-gold"> *</span>}</Label>
+      <Label>{label}</Label>
       <input
         name={name}
         type={type}
         required={required}
-        className="mt-2 w-full rounded-full border bg-white px-4 py-3 text-sm text-navy placeholder:text-navy/40 focus:border-gold focus:outline-none hairline"
+        className="mt-2.5 w-full rounded-2xl border border-navy/12 bg-white px-5 py-3.5 text-sm text-navy placeholder:text-navy/30 transition-colors focus:border-navy/40 focus:outline-none"
       />
     </label>
   );

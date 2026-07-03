@@ -1,21 +1,37 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import aboutHero from "@/assets/about us hero.webp";
+import bg2 from "@/assets/background2.webp";
 import portrait from "@/assets/about-portrait.jpg";
 import craft from "@/assets/why-craft.jpg";
+import testiBanner from "@/assets/testi-banner.webp";
+import ctaBanner from "@/assets/cta banner.webp";
 import gifts from "@/assets/cat-gift-sets.jpg";
 import diary from "@/assets/cat-diary.jpg";
+import accessories from "@/assets/cat-accessories.jpg";
+import { FadeIn } from "@/components/ui/FadeIn";
+import {
+  ArrowRight,
+  Sparkles,
+  HandHeart,
+  PackageCheck,
+  Award,
+  Gift as GiftIcon,
+  UserCircle,
+  Heart,
+} from "lucide-react";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — The Giftitude Studio" },
-      { name: "description", content: "Inside Giftitude — a small Mumbai studio of curators and craftspeople building considered corporate gifts since 2017." },
-      { property: "og:title", content: "About — The Giftitude Studio" },
-      { property: "og:description", content: "A small Mumbai studio building considered corporate gifts since 2017." },
-      { property: "og:url", content: "/about" },
+      {
+        name: "description",
+        content:
+          "Inside Giftitude — a small Mumbai studio of curators and craftspeople building considered corporate gifts since 2017.",
+      },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
   }),
   component: AboutPage,
 });
@@ -23,196 +39,497 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <div className="min-h-screen bg-white text-ink">
-      <Nav />
-      <main className="pt-32">
-        <Masthead />
-        <StorySpread />
-        <ValuesLedger />
-        <TimelineRibbon />
-        <StudioGallery />
-        <AboutCTA />
+      <Nav variant="dark" />
+      <main>
+        <FadeIn>
+          <Hero />
+        </FadeIn>
+
+        <FadeIn delay={60}>
+          <OurStory />
+        </FadeIn>
+
+        {/* Sections below share the background2 image */}
+        <div
+          className="relative"
+          style={{
+            backgroundImage: `url(${bg2})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed",
+          }}
+        >
+          <div className="absolute inset-0 bg-white/80 pointer-events-none" />
+          <div className="relative">
+            <FadeIn delay={80}>
+              <TimelineSection />
+            </FadeIn>
+            <FadeIn delay={80}>
+              <GallerySection />
+            </FadeIn>
+            <FadeIn>
+              <ClosingCTA />
+            </FadeIn>
+          </div>
+        </div>
       </main>
       <Footer />
     </div>
   );
 }
 
-function Masthead() {
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+function Hero() {
   return (
-    <section className="px-6 lg:px-12">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.3em] text-navy/55">
-          <span>Volume 08 · The Studio</span>
-          <span>Mumbai · 2026</span>
-        </div>
-        <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <h1 className="font-display text-[3rem] leading-[0.98] tracking-tight text-navy sm:text-[5rem] lg:col-span-9 lg:text-[6.5rem]">
-            We are a small <span className="italic text-gold">studio</span><br />
-            with very long <span className="italic">attention spans</span>.
-          </h1>
-          <p className="lg:col-span-3 lg:pt-6 text-sm leading-relaxed text-navy/70">
-            Giftitude began in a 200-sq-ft room in Lower Parel with a single
-            leather diary and the conviction that corporate gifting could,
-            and should, feel like a private commission.
-          </p>
-        </div>
-        <div className="mt-14 flex items-center gap-6">
-          <div className="h-px flex-1 bg-gold/60" />
-          <span className="text-[11px] uppercase tracking-[0.3em] text-gold">Established · 2017</span>
-          <div className="h-px flex-1 bg-gold/60" />
+    <section className="relative isolate h-screen flex items-end overflow-hidden bg-navy">
+      <img
+        src={aboutHero}
+        alt="Giftitude studio — curated corporate gifts"
+        className="absolute inset-0 -z-10 h-full w-full object-cover object-center"
+        loading="eager"
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-navy/90 via-navy/40 to-navy/10" />
+
+      <div className="w-full px-6 pb-20 pt-40 lg:px-12 lg:pb-24">
+        <div className="mx-auto max-w-7xl">
+          {/* eyebrow — matches homepage xs/[11px] gold caps */}
+          <div className="text-xs font-bold uppercase tracking-[0.24em] text-gold/80">
+            About Giftitude
+          </div>
+
+          <div className="max-w-2xl">
+            {/* h1 — matches homepage h1: clamp matching text-[2.75rem]…text-[5.25rem] */}
+            <h1 className="mt-4 font-display text-[2.75rem] leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[5.25rem]">
+              Thoughtful gifts.{" "}
+              <br className="hidden sm:block" />
+              <span className="italic text-gold">Stronger</span> connections.
+            </h1>
+            {/* body — text-base matches homepage hero body */}
+            <p className="mt-6 max-w-lg text-base leading-relaxed text-white/75">
+              At Giftitude, we believe every gift is an opportunity to build
+              meaningful relationships. We help businesses express gratitude,
+              celebrate milestones, and strengthen bonds through thoughtfully
+              curated corporate gifts.
+            </p>
+            <Link
+              to="/contact"
+              className="group mt-10 inline-flex items-center gap-4 rounded-full bg-gold pl-7 pr-2 py-2 text-sm font-semibold text-navy transition-all hover:bg-gold-soft"
+            >
+              Get a Quote
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-gold transition-transform group-hover:translate-x-1 font-bold">
+                <ArrowRight strokeWidth={2.5} size={17} />
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-function StorySpread() {
+// ─── Our Story ────────────────────────────────────────────────────────────────
+const values = [
+  {
+    icon: Sparkles,
+    title: "Crafted with intention",
+    desc: "Every object is selected by hand — not by algorithm.",
+  },
+  {
+    icon: HandHeart,
+    title: "Built on relationships",
+    desc: "We know the workshops, the makers, and our clients by name.",
+  },
+  {
+    icon: PackageCheck,
+    title: "End-to-end ownership",
+    desc: "From brief to doorstep, one team handles everything.",
+  },
+];
+
+function OurStory() {
   return (
-    <section className="px-6 py-24 lg:px-12 lg:py-32">
-      <div className="mx-auto grid max-w-7xl gap-16 lg:grid-cols-12 lg:gap-20">
-        <article className="lg:col-span-7">
-          <p className="font-display text-2xl leading-[1.45] text-navy first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-[5.5rem] first-letter:leading-[0.85] first-letter:text-gold">
-            We started with a question that nobody around us seemed to be
-            asking — what would corporate gifting look like if it were
-            designed for the recipient instead of the procurement spreadsheet?
-          </p>
-          <div className="mt-8 space-y-6 text-base leading-relaxed text-navy/75">
-            <p>
-              Eight years on, that question is still the brief. We work with a
-              small roster of partner workshops across Maharashtra, Rajasthan
-              and Gujarat — leatherworkers, brass turners, woodworkers — and we
-              ship under 400 briefs a year because that is the largest number
-              we can do well.
-            </p>
-            <p>
-              Every brief begins in a conversation. We ask who is being gifted
-              to, on what occasion, in what room the object will eventually
-              live. The proposal that follows is curated, not catalogued.
-            </p>
-            <p>
-              We are not a marketplace. There is no warehouse and no third
-              party between the brief and the boxed object that arrives at
-              your floor.
-            </p>
+    <section
+      className="relative bg-cover bg-center bg-no-repeat px-6 py-20 lg:px-12 lg:py-28"
+      style={{ backgroundImage: `url(${testiBanner})` }}
+    >
+      <div className="absolute inset-0 bg-white/82" />
+      <div className="relative mx-auto max-w-7xl">
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-20 lg:items-center">
+
+          {/* Image column */}
+          <div className="lg:col-span-5">
+            <div className="relative">
+              <div className="overflow-hidden rounded-[2rem] shadow-luxury">
+                <img
+                  src={portrait}
+                  alt="Aanya Rao, Founder of Giftitude"
+                  loading="lazy"
+                  className="w-full aspect-[4/5] object-cover"
+                />
+              </div>
+              {/* floating navy year badge */}
+              <div className="absolute -bottom-6 -right-4 lg:-right-8 rounded-2xl bg-navy px-6 py-5 shadow-luxury">
+                <div className="font-display text-4xl leading-none text-gold">2017</div>
+                <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.22em] text-white/50">
+                  Est. Mumbai
+                </div>
+              </div>
+              {/* craft thumbnail */}
+              <div className="absolute -top-5 -right-4 lg:-right-8 h-28 w-28 overflow-hidden rounded-2xl border-4 border-white shadow-soft">
+                <img
+                  src={craft}
+                  alt="Hand crafting a gift at our workshop"
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </div>
           </div>
-        </article>
-        <aside className="lg:col-span-5">
-          <div className="overflow-hidden">
-            <img src={portrait} alt="Founder portrait in the Mumbai studio" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+
+          {/* Text column */}
+          <div className="lg:col-span-7">
+            {/* eyebrow — text-[11px] matches WhyUs/Categories eyebrow */}
+            <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-gold">
+              About Giftitude
+            </div>
+            {/* h2 — text-4xl sm:text-5xl lg:text-6xl matches WhyUs */}
+            <h2 className="mt-4 font-display text-4xl leading-[1.1] text-navy sm:text-5xl lg:text-6xl">
+              We started with one question{" "}
+              <span className="italic text-gold">nobody was asking.</span>
+            </h2>
+
+            {/* body — text-sm matches homepage body text */}
+            <div className="mt-8 space-y-5 text-sm leading-relaxed text-navy/70">
+              <p>
+                Giftitude was born in 2017 from a leave of absence, a leather
+                diary, and a stubborn belief — that corporate gifting had been
+                designed entirely around the person placing the order, not the
+                person opening the box.
+              </p>
+              <p>
+                We work with a small roster of partner workshops across
+                Maharashtra, Rajasthan and Gujarat. Leatherworkers in Dharavi,
+                brass turners in Moradabad, woodworkers in Jodhpur. We visit
+                them, know their names, and when a brief arrives we go to the
+                workshop first — not the spreadsheet.
+              </p>
+              <p className="font-medium text-navy/85">
+                We take fewer than 400 briefs a year. Not because we can't take
+                more — because that's the number we can do well.
+              </p>
+            </div>
+
+            {/* value cards — matches WhyUs card pattern */}
+            <div className="mt-10 grid gap-5 sm:grid-cols-3">
+              {values.map(({ icon: Icon, title, desc }) => (
+                <div
+                  key={title}
+                  className="flex flex-col rounded-3xl bg-[#fdfaf5] p-6"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy text-gold">
+                      <Icon size={18} strokeWidth={2.5} />
+                    </div>
+                    <div>
+                      {/* card title — font-display text-lg matches WhyUs */}
+                      <div className="font-display text-lg text-navy">{title}</div>
+                      {/* card body — text-xs matches WhyUs */}
+                      <div className="mt-1.5 text-xs leading-relaxed text-navy/70">{desc}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* founder byline */}
+            <div className="mt-10 flex items-center gap-4 border-t border-navy/8 pt-6">
+              <div className="h-10 w-10 overflow-hidden rounded-full">
+                <img src={portrait} alt="Aanya Rao" className="h-full w-full object-cover" />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-navy">Aanya Rao</div>
+                {/* meta — text-[10px] matches Testimonials role text */}
+                <div className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-navy/50">
+                  Founder · Lower Parel, Mumbai
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="mt-4 italic text-sm uppercase tracking-[0.18em] text-navy/60">
-            Aanya Rao, founder · photographed at the studio, Lower Parel
-          </div>
-        </aside>
+
+        </div>
       </div>
     </section>
   );
 }
 
-function ValuesLedger() {
-  const items = [
-    { n: "01", t: "Craft", d: "Made by hand, in small workshops, by people whose names we know." },
-    { n: "02", t: "Curation", d: "Every object earns its place. Nothing is in the catalogue by accident." },
-    { n: "03", t: "Care", d: "One curator, from brief to delivery. One thread, never handed off." },
-  ];
+// ─── Timeline ─────────────────────────────────────────────────────────────────
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+
+const milestones = [
+  { y: "2017", t: "Founded with a vision", d: "Founded with a mission to redefine corporate gifting in India." },
+  { y: "2019", t: "Expanded product range", d: "We broadened our product range and onboarded 100+ clients." },
+  { y: "2021", t: "Launched pan-India delivery", d: "Launched pan-India delivery and built gifting solutions." },
+  { y: "2023", t: "Introduced sustainable gifts", d: "Introduced sustainable and eco-friendly gift collections." },
+  { y: "2025", t: "Continuing to create", d: "Continuing to create meaningful gifting experiences." },
+];
+
+function TimelineSection() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-15% 0px" });
+
   return (
-    <section className="border-y bg-ivory px-6 py-20 hairline lg:px-12">
+    <section className="bg-transparent px-6 py-20 lg:px-12 lg:py-28">
       <div className="mx-auto max-w-7xl">
-        <div className="text-[11px] uppercase tracking-[0.3em] text-gold">The Ledger</div>
-        <div className="mt-10 grid gap-10 lg:grid-cols-3 lg:divide-x lg:divide-navy/15">
-          {items.map((i) => (
-            <div key={i.n} className="lg:px-10 first:lg:pl-0 last:lg:pr-0">
-              <div className="font-display text-6xl text-gold">{i.n}</div>
-              <div className="mt-4 font-display text-3xl text-navy">{i.t}</div>
-              <p className="mt-3 text-sm leading-relaxed text-navy/70">{i.d}</p>
+
+        {/* heading — fades in from left */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10% 0px" }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
+          <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-gold">
+            Our Journey
+          </div>
+          <h2 className="mt-4 font-display text-4xl leading-[1.1] text-navy sm:text-5xl">
+            Milestones that shaped us
+          </h2>
+        </motion.div>
+
+        {/* ── Desktop: horizontal animated timeline ── */}
+        <div ref={ref} className="hidden lg:block">
+          <div className="relative">
+
+            {/* line draws left → right */}
+            <motion.div
+              className="absolute left-0 top-3 h-px bg-navy/20 origin-left"
+              initial={{ scaleX: 0 }}
+              animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
+              transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1], delay: 0.1 }}
+              style={{ right: 0 }}
+            />
+
+            <div className="grid grid-cols-5">
+              {milestones.map((m, i) => (
+                <div key={m.y} className="relative flex flex-col items-center px-4">
+
+                  {/* dot springs in after line passes it */}
+                  <motion.div
+                    className="relative z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 border-gold/40 bg-white shadow-soft"
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={inView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 20,
+                      delay: 0.2 + i * 0.18,
+                    }}
+                  >
+                    <motion.div
+                      className="h-2.5 w-2.5 rounded-full bg-navy"
+                      initial={{ scale: 0 }}
+                      animate={inView ? { scale: 1 } : { scale: 0 }}
+                      transition={{ delay: 0.35 + i * 0.18, duration: 0.25 }}
+                    />
+                  </motion.div>
+
+                  {/* content fades up after dot */}
+                  <motion.div
+                    className="mt-7 text-center"
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.21, 0.47, 0.32, 0.98],
+                      delay: 0.45 + i * 0.18,
+                    }}
+                  >
+                    <div className="font-display text-2xl text-navy">{m.y}</div>
+                    <div className="mt-2 text-[11px] font-bold uppercase tracking-[0.2em] text-navy/70">
+                      {m.t}
+                    </div>
+                    <div className="mt-2 text-xs leading-relaxed text-navy/50">
+                      {m.d}
+                    </div>
+                  </motion.div>
+
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Mobile: vertical staggered list ── */}
+        <ol className="space-y-8 lg:hidden border-l border-navy/12 pl-8">
+          {milestones.map((m, i) => (
+            <motion.li
+              key={m.y}
+              className="relative"
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-5% 0px" }}
+              transition={{
+                duration: 0.5,
+                ease: [0.21, 0.47, 0.32, 0.98],
+                delay: i * 0.1,
+              }}
+            >
+              <div className="absolute -left-[33px] top-1 flex h-5 w-5 items-center justify-center rounded-full border border-gold/40 bg-white shadow-soft">
+                <div className="h-2 w-2 rounded-full bg-navy" />
+              </div>
+              <div className="font-display text-2xl text-navy">{m.y}</div>
+              <div className="mt-1 text-[11px] font-bold uppercase tracking-[0.2em] text-navy/70">
+                {m.t}
+              </div>
+              <div className="mt-1 text-xs leading-relaxed text-navy/50">
+                {m.d}
+              </div>
+            </motion.li>
+          ))}
+        </ol>
+
+      </div>
+    </section>
+  );
+}
+
+// ─── Gallery ──────────────────────────────────────────────────────────────────
+const galleryItems = [
+  { src: craft, alt: "Premium quality craftsmanship", caption: "Premium Quality", icon: Award, desc: "We use the finest materials and finishes to ensure every detail reflects excellence." },
+  { src: gifts, alt: "Gifts curated with care", caption: "Curated with Care", icon: GiftIcon, desc: "Each piece is handpicked and designed to create a meaningful and memorable experience." },
+  { src: diary, alt: "Made to represent your brand", caption: "Made to Represent", icon: UserCircle, desc: "Your brand, your values, your message — beautifully expressed in every gift." },
+  { src: accessories, alt: "Delivered with pride", caption: "Delivered with Pride", icon: Heart, desc: "From careful packaging to timely delivery, we ensure a seamless gifting experience." },
+];
+
+function GallerySection() {
+  return (
+    <section className="bg-transparent px-6 py-20 lg:px-12 lg:py-28">
+      <div className="mx-auto max-w-7xl">
+
+        {/* centred heading */}
+        <div className="mb-16 text-center">
+          {/* eyebrow */}
+          <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-gold">
+            Every gift tells a story
+          </div>
+          <div className="mx-auto mt-3 h-px w-8 bg-gold/50" />
+          {/* h2 — text-4xl sm:text-5xl */}
+          <h2 className="mt-6 font-display text-4xl leading-[1.1] text-navy sm:text-5xl">
+            Thoughtfully curated.
+            <br />
+            <span className="italic text-gold">Beautifully delivered.</span>
+          </h2>
+        </div>
+
+        {/* 4-card grid */}
+        <div className="grid grid-cols-2 gap-5 sm:grid-cols-4 lg:gap-7">
+          {galleryItems.map(({ src, alt, caption, icon: Icon, desc }) => (
+            <div key={caption} className="flex flex-col">
+              <div className="relative">
+                <div className="overflow-hidden rounded-2xl">
+                  <img
+                    src={src}
+                    alt={alt}
+                    loading="lazy"
+                    className="w-full aspect-[3/4] object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                </div>
+                {/* navy icon badge */}
+                <div className="absolute -bottom-5 left-1/2 z-10 -translate-x-1/2 flex h-[2.6rem] w-[2.6rem] items-center justify-center rounded-full border-[3px] border-white/90 bg-navy shadow-luxury">
+                  <Icon size={16} strokeWidth={1.6} className="text-gold" />
+                </div>
+              </div>
+
+              <div className="mt-10 flex flex-col items-center text-center px-1">
+                {/* caption — text-[11px] caps matches homepage small labels */}
+                <div className="text-[11px] font-bold uppercase tracking-[0.2em] text-navy">
+                  {caption}
+                </div>
+                <div className="mt-2.5 h-px w-6 bg-gold/50" />
+                {/* desc — text-xs matches WhyUs/Categories card descriptions */}
+                <p className="mt-3 text-xs leading-relaxed text-navy/55">
+                  {desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
 }
 
-function TimelineRibbon() {
-  const events = [
-    { y: "2017", t: "Studio opens", above: true },
-    { y: "2019", t: "First leather workshop partnership", above: false },
-    { y: "2021", t: "Pan-India fulfilment", above: true },
-    { y: "2023", t: "100th retained client", above: false },
-    { y: "2026", t: "Heritage Collection", above: true },
-  ];
+// ─── Closing CTA ─────────────────────────────────────────────────────────────
+function ClosingCTA() {
   return (
-    <section className="px-6 py-24 lg:px-12">
-      <div className="mx-auto max-w-7xl">
-        <div className="flex items-end justify-between">
-          <h2 className="font-display text-4xl text-navy sm:text-5xl">A short timeline.</h2>
-          <span className="text-[11px] uppercase tracking-[0.3em] text-navy/55">2017 — 2026</span>
-        </div>
+    <section className="bg-transparent">
+      <div
+        className="relative overflow-hidden bg-navy px-8 py-8 sm:px-12 sm:py-10 lg:px-20 lg:py-10"
+        style={{ backgroundImage: `url(${ctaBanner})`, backgroundSize: "cover", backgroundPosition: "center" }}
+      >
+        {/* dark overlay so text stays crisp over the banner */}
+        <div className="absolute inset-0 bg-navy/70" />
+          {/* radial gold glow — top right */}
+          <div
+            className="pointer-events-none absolute -top-32 -right-32 h-[600px] w-[600px] rounded-full opacity-50 blur-3xl"
+            style={{ background: "radial-gradient(circle, oklch(0.71 0.13 78 / 0.35), transparent 60%)" }}
+          />
+          {/* secondary glow — bottom left */}
+          <div
+            className="pointer-events-none absolute -bottom-20 -left-20 h-[400px] w-[400px] rounded-full opacity-30 blur-3xl"
+            style={{ background: "radial-gradient(circle, oklch(0.71 0.13 78 / 0.2), transparent 60%)" }}
+          />
 
-        <div className="relative mt-20 hidden lg:block">
-          <div className="absolute left-0 right-0 top-1/2 h-px bg-gold/60" />
-          <div className="relative grid grid-cols-5">
-            {events.map((e) => (
-              <div key={e.y} className="relative flex flex-col items-center">
-                <div className={`absolute ${e.above ? "bottom-1/2 mb-6" : "top-1/2 mt-6"} text-center w-44`}>
-                  <div className="font-display text-3xl text-navy">{e.y}</div>
-                  <div className="mt-1 text-xs text-navy/70">{e.t}</div>
-                </div>
-                <div className="z-10 h-3 w-3 rounded-full bg-navy ring-4 ring-white" />
+          <div className="relative mx-auto max-w-7xl grid gap-8 lg:grid-cols-1 lg:items-center">
+
+            {/* ── Left: copy ── */}
+            <div className="max-w-3xl">
+              <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-gold">
+                Work with us
               </div>
-            ))}
+              <h2 className="mt-3 font-display text-3xl leading-[1.05] text-white sm:text-4xl lg:text-5xl">
+                Tell us who you're{" "}
+                <span className="italic text-gold">gifting</span>.{" "}
+                We'll do the rest.
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/55">
+                Share the occasion, the count, and a sense of the recipient.
+                A curator replies within one working day with a proposal.
+              </p>
+
+              <div className="mt-5 flex flex-wrap items-center gap-4">
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center gap-3 rounded-full bg-gold pl-6 pr-1.5 py-1.5 text-sm font-semibold text-navy transition-all hover:bg-gold-soft"
+                >
+                  Start a brief
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-navy text-gold font-bold transition-transform group-hover:translate-x-1">
+                    <ArrowRight strokeWidth={2.5} size={15} />
+                  </span>
+                </Link>
+                <a
+                  href="tel:+912200000000"
+                  className="text-sm text-white/50 underline-offset-4 hover:text-white hover:underline transition-colors"
+                >
+                  or call +91 22 0000 0000
+                </a>
+              </div>
+
+              {/* trust strip */}
+              <div className="mt-6 flex flex-wrap items-center gap-5 border-t border-white/10 pt-5">
+                {["400+ briefs delivered", "1,200+ brands served", "Reply within 1 working day"].map((item) => (
+                  <div key={item} className="flex items-center gap-2">
+                    <div className="h-1 w-1 rounded-full bg-gold" />
+                    <span className="text-xs font-medium text-white/45">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
-          <div className="h-48" />
-        </div>
-
-        <ol className="mt-12 space-y-6 lg:hidden">
-          {events.map((e) => (
-            <li key={e.y} className="flex gap-4 border-l border-gold/60 pl-5">
-              <div>
-                <div className="font-display text-2xl text-navy">{e.y}</div>
-                <div className="text-sm text-navy/70">{e.t}</div>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
-function StudioGallery() {
-  return (
-    <section className="px-6 pb-24 lg:px-12">
-      <div className="mx-auto grid max-w-7xl gap-4 lg:grid-cols-12 lg:grid-rows-2">
-        <figure className="lg:col-span-5 lg:row-span-2">
-          <img src={craft} alt="Leather being hand-stitched at a partner workshop" loading="lazy" className="aspect-[3/4] h-full w-full object-cover" />
-          <figcaption className="mt-2 text-xs uppercase tracking-[0.18em] text-navy/55">Hand-stitching — Dharavi workshop</figcaption>
-        </figure>
-        <figure className="lg:col-span-7">
-          <img src={gifts} alt="Boxed gift sets ready for dispatch" loading="lazy" className="aspect-[16/9] w-full object-cover" />
-          <figcaption className="mt-2 text-xs uppercase tracking-[0.18em] text-navy/55">Dispatch floor — Lower Parel</figcaption>
-        </figure>
-        <figure className="lg:col-span-7">
-          <img src={diary} alt="Diary and brass details on a studio table" loading="lazy" className="aspect-[16/9] w-full object-cover" />
-          <figcaption className="mt-2 text-xs uppercase tracking-[0.18em] text-navy/55">Edit table — Heritage Collection</figcaption>
-        </figure>
-      </div>
-    </section>
-  );
-}
-
-function AboutCTA() {
-  return (
-    <section className="bg-ivory px-6 py-28 lg:px-12">
-      <div className="mx-auto max-w-4xl text-center">
-        <p className="font-display text-3xl italic leading-[1.3] text-navy sm:text-5xl">
-          "The brief is small. The attention is large."
-        </p>
-        <div className="mt-10">
-          <Link to="/contact" className="text-sm font-medium uppercase tracking-[0.2em] text-navy underline decoration-gold decoration-2 underline-offset-8 hover:text-gold">
-            Visit the studio →
-          </Link>
-        </div>
       </div>
     </section>
   );

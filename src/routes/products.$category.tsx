@@ -28,7 +28,7 @@ export const Route = createFileRoute("/products/$category")({
   notFoundComponent: () => <CategoryMissing />,
   errorComponent: ({ reset }) => (
     <div className="min-h-screen bg-ivory">
-      <Nav />
+      <Nav variant="light" />
       <main className="mx-auto max-w-xl px-6 pt-40 text-center">
         <h1 className="font-display text-4xl text-navy">Something went wrong</h1>
         <button onClick={reset} className="mt-6 rounded-full bg-navy px-6 py-3 text-sm text-ivory">
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/products/$category")({
 function CategoryMissing() {
   return (
     <div className="min-h-screen bg-ivory">
-      <Nav />
+      <Nav variant="light" />
       <main className="mx-auto max-w-xl px-6 pt-40 text-center">
         <h1 className="font-display text-5xl text-navy">Room not found</h1>
         <p className="mt-3 text-sm text-navy/70">That category doesn't exist in the 2026 catalogue.</p>
@@ -60,7 +60,7 @@ function CategoryPage() {
   const { category } = Route.useLoaderData();
   return (
     <div className="min-h-screen bg-white text-ink">
-      <Nav />
+      <Nav variant="light" />
       <main className="pt-28">
         <CategoryMasthead category={category} />
         <div className="px-6 pb-24 lg:px-12">
