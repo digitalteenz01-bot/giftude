@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
+import { motion } from "framer-motion";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { ArrowRight } from "lucide-react";
@@ -42,6 +43,19 @@ function inferCategory(product?: string): string {
   return "gift-sets";
 }
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay,
+      duration: 0.5,
+      ease: [0.21, 0.47, 0.32, 0.98],
+    },
+  }),
+};
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 function ContactPage() {
   const { product } = Route.useSearch();
@@ -61,7 +75,12 @@ function ContactPage() {
       <main className="mx-auto max-w-3xl px-6 pb-24 pt-32 lg:px-8 lg:pt-36">
 
         {/* ── Page header ── */}
-        <div className="mb-12 border-b border-navy/8 pb-10">
+        <motion.div
+          className="mb-12 border-b border-navy/8 pb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
           <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-gold">
             Begin a brief
           </div>
@@ -76,33 +95,46 @@ function ContactPage() {
             <span className="h-1.5 w-1.5 rounded-full bg-gold animate-pulse" />
             <span className="text-xs text-navy/45">Reply within 1 working day</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* ── Form ── */}
         <ContactForm productSlug={product} />
 
         {/* ── Contact details strip ── */}
-        <div className="mt-16 grid gap-6 border-t border-navy/8 pt-10 sm:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          className="mt-16 grid gap-6 border-t border-navy/8 pt-10 sm:grid-cols-2 lg:grid-cols-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           {[
             { label: "Email",  value: "hello@giftitude.in",  href: "mailto:hello@giftitude.in" },
             { label: "Phone",  value: "+91 22 0000 0000",     href: "tel:+912200000000" },
             { label: "Studio", value: "Lower Parel, Mumbai",  href: null },
             { label: "Hours",  value: "Mon – Sat · 10–19 IST", href: null },
-          ].map(({ label, value, href }) => (
-            <div key={label}>
-              <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-navy/35">
+          ].map(({ label, value, href }, i) => (
+            <motion.div
+              key={label}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 * i, duration: 0.4 }}
+              className="group"
+            >
+              <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-navy/35 transition-colors duration-300 group-hover:text-gold">
                 {label}
               </div>
               {href ? (
-                <a href={href} className="mt-1 block text-sm text-navy/70 transition-colors hover:text-gold">
+                <a href={href} className="mt-1 block text-sm text-navy/70 transition-all duration-300 hover:text-gold hover:translate-x-0.5">
                   {value}
                 </a>
               ) : (
                 <p className="mt-1 text-sm text-navy/70">{value}</p>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </main>
       </div>
@@ -164,19 +196,36 @@ function ContactForm({ productSlug }: { productSlug?: string }) {
         <form onSubmit={onSubmit} className="space-y-6">
 
           {/* Row 1 */}
-          <div className="grid gap-6 sm:grid-cols-2">
+          <motion.div
+            className="grid gap-6 sm:grid-cols-2"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.15}
+          >
             <Field label="Your name *"  name="name"    required />
             <Field label="Company *"    name="company" required />
-          </div>
+          </motion.div>
 
           {/* Row 2 */}
-          <div className="grid gap-6 sm:grid-cols-2">
+          <motion.div
+            className="grid gap-6 sm:grid-cols-2"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.25}
+          >
             <Field label="Work email *" name="email" type="email" required />
             <Field label="Phone"        name="phone" type="tel" />
-          </div>
+          </motion.div>
 
           {/* Category */}
-          <div>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.35}
+          >
             <Label>Category</Label>
             <div className="mt-3 flex flex-wrap gap-2">
               {CATEGORIES.map((c) => (
@@ -184,20 +233,25 @@ function ContactForm({ productSlug }: { productSlug?: string }) {
                   key={c.value}
                   type="button"
                   onClick={() => setCategory(c.value)}
-                  className={`rounded-full border px-4 py-2 text-xs font-medium transition-all ${
+                  className={`rounded-full border px-4 py-2 text-xs font-medium transition-all duration-300 ${
                     c.value === category
-                      ? "border-navy bg-navy text-white"
-                      : "border-navy/12 bg-white text-navy/60 hover:border-navy/30 hover:text-navy"
+                      ? "border-navy bg-navy text-white shadow-soft scale-[1.02]"
+                      : "border-navy/12 bg-white text-navy/60 hover:border-navy/30 hover:text-navy hover:scale-[1.04] hover:shadow-sm active:scale-[0.97]"
                   }`}
                 >
                   {c.label}
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quantity */}
-          <div>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.45}
+          >
             <div className="flex items-center justify-between">
               <Label>Approximate quantity</Label>
               <span className="text-sm font-semibold text-navy">{qty}</span>
@@ -213,42 +267,59 @@ function ContactForm({ productSlug }: { productSlug?: string }) {
               <span>25</span>
               <span>2,500+</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Message */}
-          <div>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.55}
+          >
             <Label>Message *</Label>
             <textarea
               name="message"
               rows={5}
               required
               placeholder="Occasion, timeline, recipients, any thoughts on tone…"
-              className="mt-3 w-full resize-none rounded-2xl border border-navy/12 bg-white px-5 py-4 text-sm text-navy placeholder:text-navy/30 transition-colors focus:border-navy/40 focus:outline-none"
+              className="mt-3 w-full resize-none rounded-2xl border border-navy/12 bg-white px-5 py-4 text-sm text-navy placeholder:text-navy/30 transition-all duration-300 focus:border-gold focus:shadow-[0_0_0_3px] focus:shadow-gold/10 focus:outline-none"
             />
-          </div>
+          </motion.div>
 
           {/* Submit */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          <motion.div
+            className="flex flex-wrap items-center gap-4 pt-2"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.65}
+          >
             <button
               type="submit"
-              className="group inline-flex items-center gap-4 rounded-full bg-navy pl-7 pr-2 py-2 text-sm font-semibold text-white transition-all hover:bg-navy-soft"
+              className="group inline-flex items-center gap-4 rounded-full bg-navy pl-7 pr-2 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-navy-soft hover:shadow-luxury hover:scale-[1.02] active:scale-[0.98]"
             >
               {sent ? "Re-open on WhatsApp" : "Send enquiry"}
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold text-navy font-bold transition-transform group-hover:translate-x-1">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold text-navy font-bold transition-all duration-300 group-hover:translate-x-1 group-hover:bg-white group-hover:text-navy">
                 <ArrowRight strokeWidth={2.5} size={16} />
               </span>
             </button>
             <Link
               to="/products"
-              className="text-sm text-navy/45 underline-offset-4 hover:underline hover:text-navy transition-colors"
+              className="hover-underline text-sm text-navy/45 underline-offset-4 transition-colors duration-300 hover:text-navy"
             >
               or browse the catalogue
             </Link>
-          </div>
+          </motion.div>
 
-          <p className="text-xs text-navy/35">
+          <motion.p
+            className="text-xs text-navy/35"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.75}
+          >
             Submitting opens WhatsApp with the brief pre-filled. We don't store form data.
-          </p>
+          </motion.p>
 
         </form>
     </div>
@@ -273,13 +344,13 @@ function Field({
   required?: boolean;
 }) {
   return (
-    <label className="block">
+    <label className="block group/field">
       <Label>{label}</Label>
       <input
         name={name}
         type={type}
         required={required}
-        className="mt-2.5 w-full rounded-2xl border border-navy/12 bg-white px-5 py-3.5 text-sm text-navy placeholder:text-navy/30 transition-colors focus:border-navy/40 focus:outline-none"
+        className="mt-2.5 w-full rounded-2xl border border-navy/12 bg-white px-5 py-3.5 text-sm text-navy placeholder:text-navy/30 transition-all duration-300 focus:border-gold focus:shadow-[0_0_0_3px] focus:shadow-gold/10 focus:outline-none hover:border-navy/25"
       />
     </label>
   );

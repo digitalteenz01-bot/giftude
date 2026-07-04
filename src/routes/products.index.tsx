@@ -99,41 +99,41 @@ function ProductsIndex() {
                   <Link
                     to="/products/$category"
                     params={{ category: c.slug }}
-                    className="group flex items-center gap-4 py-5 transition-colors lg:gap-8 lg:py-6"
+                    className="group flex items-center gap-3 py-5 lg:gap-8 lg:py-6 transition-all duration-300 hover:translate-x-1"
                   >
                     {/* number */}
-                    <div className="w-10 shrink-0 font-display text-xl text-gold/70 lg:w-14 lg:text-2xl">
+                    <div className="w-8 shrink-0 font-display text-lg text-gold/70 lg:w-14 lg:text-2xl transition-colors duration-300 group-hover:text-gold">
                       {c.n}
                     </div>
 
-                    {/* icon circle */}
-                    <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full border border-navy/10 bg-white text-navy">
+                    {/* icon circle — hidden on small screens */}
+                    <div className="hidden sm:flex shrink-0 h-12 w-12 items-center justify-center rounded-full border border-navy/10 bg-white text-navy transition-all duration-300 group-hover:bg-navy group-hover:text-gold group-hover:border-navy group-hover:scale-110">
                       <Icon size={18} strokeWidth={1.4} />
                     </div>
 
                     {/* title + tagline */}
-                    <div className="flex-1 min-w-0">
-                      <div className="font-display text-xl leading-tight text-navy lg:text-2xl">
+                    <div className="flex-1 min-w-0 overflow-hidden">
+                      <div className="font-display text-base leading-snug text-navy sm:text-xl lg:text-2xl transition-colors duration-300 group-hover:text-gold">
                         {c.title}
                       </div>
-                      <div className="mt-1 text-xs leading-relaxed text-navy/50 max-w-[200px] lg:max-w-xs">
+                      <div className="mt-1 text-xs leading-relaxed text-navy/50 line-clamp-2 lg:max-w-xs">
                         {c.tagline}
                       </div>
                     </div>
 
                     {/* product image */}
-                    <div className="shrink-0 overflow-hidden rounded-xl">
+                    <div className="shrink-0 overflow-hidden rounded-xl transition-shadow duration-300 group-hover:shadow-soft">
                       <img
                         src={c.cover}
                         alt={c.alt}
                         loading="lazy"
-                        className="h-20 w-32 object-cover transition-transform duration-700 group-hover:scale-105 lg:h-24 lg:w-40"
+                        className="h-16 w-24 object-cover transition-transform duration-700 group-hover:scale-110 sm:h-20 sm:w-32 lg:h-24 lg:w-40"
                       />
                     </div>
 
                     {/* arrow */}
-                    <div className="ml-1 shrink-0 flex h-10 w-10 items-center justify-center rounded-full bg-navy text-white transition-all duration-300 group-hover:bg-gold group-hover:text-navy">
-                      <ArrowRight size={15} strokeWidth={2} />
+                    <div className="shrink-0 flex h-9 w-9 items-center justify-center rounded-full bg-navy text-white transition-all duration-300 group-hover:bg-gold group-hover:text-navy group-hover:scale-110 lg:h-10 lg:w-10">
+                      <ArrowRight size={14} strokeWidth={2} />
                     </div>
                   </Link>
                 </motion.li>
@@ -163,10 +163,10 @@ function ProductsIndex() {
 
               <Link
                 to="/contact"
-                className="group inline-flex shrink-0 items-center gap-4 rounded-full bg-gold pl-7 pr-2 py-2 text-sm font-semibold text-navy transition-all hover:bg-gold-soft"
+                className="group inline-flex self-start shrink-0 items-center gap-4 rounded-full bg-gold pl-7 pr-2 py-2 text-sm font-semibold text-navy transition-all duration-300 hover:bg-gold-soft hover:shadow-[0_0_20px_4px] hover:shadow-gold/25 hover:scale-[1.02] active:scale-[0.98]"
               >
                 Begin a brief
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-gold font-bold transition-transform group-hover:translate-x-1">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-gold font-bold transition-all duration-300 group-hover:translate-x-1 group-hover:bg-white group-hover:text-navy">
                   <ArrowRight strokeWidth={2.5} size={16} />
                 </span>
               </Link>

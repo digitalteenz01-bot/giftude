@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import logo from "@/assets/logo.png";
 
 const studioLinks = [
@@ -21,15 +22,21 @@ export function Footer() {
 
       {/* ── Main grid ── */}
       <div className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+        <motion.div
+          className="grid gap-12 lg:grid-cols-12 lg:gap-8"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-5% 0px" }}
+          transition={{ duration: 0.6, ease: [0.21, 0.47, 0.32, 0.98] }}
+        >
 
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <Link to="/" className="inline-flex items-center">
+            <Link to="/" className="group inline-flex items-center">
               <img
                 src={logo}
                 alt="Giftitude"
-                className="h-10 w-auto"
+                className="h-10 w-auto transition-all duration-300 group-hover:scale-105 group-hover:brightness-110"
                 style={{ filter: "brightness(0) invert(1)" }}
               />
             </Link>
@@ -44,7 +51,7 @@ export function Footer() {
               <a
                 href="#"
                 aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all hover:border-gold/50 hover:text-gold"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-300 hover:border-gold/50 hover:text-gold hover:scale-110 hover:bg-gold/10 hover:shadow-[0_0_12px_2px] hover:shadow-gold/20"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
@@ -53,7 +60,7 @@ export function Footer() {
               <a
                 href="#"
                 aria-label="LinkedIn"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all hover:border-gold/50 hover:text-gold"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-300 hover:border-gold/50 hover:text-gold hover:scale-110 hover:bg-gold/10 hover:shadow-[0_0_12px_2px] hover:shadow-gold/20"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
@@ -62,7 +69,7 @@ export function Footer() {
               <a
                 href="#"
                 aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all hover:border-gold/50 hover:text-gold"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-300 hover:border-gold/50 hover:text-gold hover:scale-110 hover:bg-gold/10 hover:shadow-[0_0_12px_2px] hover:shadow-gold/20"
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -80,11 +87,11 @@ export function Footer() {
                 Explore
               </div>
               <ul className="mt-5 space-y-3">
-                {studioLinks.map((l) => (
+                {studioLinks.map((l, i) => (
                   <li key={l.to}>
                     <Link
                       to={l.to}
-                      className="text-sm text-white/60 transition-colors hover:text-gold"
+                      className="hover-underline inline-block text-sm text-white/60 transition-all duration-300 hover:text-gold hover:translate-x-1"
                     >
                       {l.label}
                     </Link>
@@ -99,12 +106,12 @@ export function Footer() {
                 Catalogue
               </div>
               <ul className="mt-5 space-y-3">
-                {catalogueLinks.map((l) => (
+                {catalogueLinks.map((l, i) => (
                   <li key={l.slug}>
                     <Link
                       to="/products/$category"
                       params={{ category: l.slug }}
-                      className="text-sm text-white/60 transition-colors hover:text-gold"
+                      className="hover-underline inline-block text-sm text-white/60 transition-all duration-300 hover:text-gold hover:translate-x-1"
                     >
                       {l.label}
                     </Link>
@@ -123,13 +130,13 @@ export function Footer() {
             <ul className="mt-5 space-y-3">
               <li>
                 <a href="mailto:hello@giftitude.in"
-                  className="text-sm text-white/60 transition-colors hover:text-gold">
+                  className="hover-underline inline-block text-sm text-white/60 transition-all duration-300 hover:text-gold hover:translate-x-1">
                   hello@giftitude.in
                 </a>
               </li>
               <li>
                 <a href="tel:+912200000000"
-                  className="text-sm text-white/60 transition-colors hover:text-gold">
+                  className="hover-underline inline-block text-sm text-white/60 transition-all duration-300 hover:text-gold hover:translate-x-1">
                   +91 22 0000 0000
                 </a>
               </li>
@@ -139,7 +146,7 @@ export function Footer() {
             </ul>
           </div>
 
-        </div>
+        </motion.div>
       </div>
 
       {/* ── Bottom bar ── */}
@@ -147,9 +154,9 @@ export function Footer() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-6 py-5 text-[11px] text-white/30 sm:flex-row sm:items-center lg:px-12">
           <span>© {new Date().getFullYear()} Giftitude Studio Pvt. Ltd. All rights reserved.</span>
           <div className="flex items-center gap-5">
-            <a href="#" className="transition-colors hover:text-gold">Privacy Policy</a>
+            <a href="#" className="transition-all duration-300 hover:text-gold hover:translate-x-0.5">Privacy Policy</a>
             <span className="h-3 w-px bg-white/15" />
-            <a href="#" className="transition-colors hover:text-gold">Terms & Conditions</a>
+            <a href="#" className="transition-all duration-300 hover:text-gold hover:translate-x-0.5">Terms & Conditions</a>
           </div>
         </div>
       </div>

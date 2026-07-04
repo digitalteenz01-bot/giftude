@@ -2,6 +2,12 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { CATEGORIES, getCategory, type Category, type Product } from "@/lib/catalogue";
+import { FadeIn } from "@/components/ui/FadeIn";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
+
+// WhatsApp business number — digits only with country code
+const WA_NUMBER = "919200000000";
 
 export const Route = createFileRoute("/products/$category")({
   loader: ({ params }) => {
@@ -31,7 +37,7 @@ export const Route = createFileRoute("/products/$category")({
       <Nav variant="light" />
       <main className="mx-auto max-w-xl px-6 pt-40 text-center">
         <h1 className="font-display text-4xl text-navy">Something went wrong</h1>
-        <button onClick={reset} className="mt-6 rounded-full bg-navy px-6 py-3 text-sm text-ivory">
+        <button onClick={reset} className="mt-6 rounded-full bg-navy px-6 py-3 text-sm text-ivory transition-all duration-300 hover:bg-navy-soft hover:scale-[1.02] active:scale-[0.98]">
           Try again
         </button>
       </main>
@@ -47,7 +53,7 @@ function CategoryMissing() {
       <main className="mx-auto max-w-xl px-6 pt-40 text-center">
         <h1 className="font-display text-5xl text-navy">Room not found</h1>
         <p className="mt-3 text-sm text-navy/70">That category doesn't exist in the 2026 catalogue.</p>
-        <Link to="/products" className="mt-8 inline-block rounded-full bg-navy px-6 py-3 text-sm text-ivory">
+        <Link to="/products" className="mt-8 inline-block rounded-full bg-navy px-6 py-3 text-sm text-ivory transition-all duration-300 hover:bg-navy-soft hover:scale-[1.02]">
           ← Back to catalogue
         </Link>
       </main>
@@ -56,215 +62,231 @@ function CategoryMissing() {
   );
 }
 
+// ─── Page ─────────────────────────────────────────────────────────────────────
 function CategoryPage() {
   const { category } = Route.useLoaderData();
   return (
-    <div className="min-h-screen bg-white text-ink">
+    <div className="min-h-screen bg-ivory text-ink">
       <Nav variant="light" />
-      <main className="pt-28">
-        <CategoryMasthead category={category} />
-        <div className="px-6 pb-24 lg:px-12">
-          <div className="mx-auto max-w-7xl">
-            <CategoryLayout category={category} />
-          </div>
-        </div>
-        <CategoryPager current={category.slug} />
-        <Footer />
+      <main>
+        <FadeIn>
+          <Masthead category={category} />
+        </FadeIn>
+        <FadeIn delay={60}>
+          <ProductGrid items={category.items} />
+        </FadeIn>
+        <FadeIn>
+          <CategoryPager current={category.slug} />
+        </FadeIn>
       </main>
+      <Footer />
     </div>
   );
 }
 
-function CategoryMasthead({ category }: { category: Category }) {
+// ─── Masthead ─────────────────────────────────────────────────────────────────
+function Masthead({ category }: { category: Category }) {
   return (
-    <section className="border-y px-6 py-12 hairline lg:px-12">
-      <div className="mx-auto max-w-7xl">
-        <nav className="text-[11px] uppercase tracking-[0.3em] text-navy/55">
-          <Link to="/products" className="hover:text-gold">Catalogue</Link>
-          <span className="mx-2">/</span>
-          <span className="text-navy">Room {category.n}</span>
-        </nav>
-        <div className="mt-6 grid gap-10 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-8">
-            <div className="text-[11px] uppercase tracking-[0.3em] text-gold">Room {category.n}</div>
-            <h1 className="mt-3 font-display text-[2.5rem] leading-[1] text-navy sm:text-6xl lg:text-7xl">
-              {category.title}
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-navy/75">{category.intro}</p>
-          </div>
-          <div className="lg:col-span-4 lg:text-right">
-            <div className="font-display text-[6rem] leading-none text-gold/70 lg:text-[8rem]">{category.n}</div>
-            <div className="mt-1 text-[11px] uppercase tracking-[0.3em] text-navy/55">{category.items.length} objects</div>
-          </div>
+    <section className="relative overflow-hidden bg-navy pt-28 pb-16 lg:pt-32 lg:pb-20">
+      {/* cover image bleed with subtle zoom */}
+      <motion.img
+        src={category.cover}
+        alt={category.title}
+        className="absolute inset-0 h-full w-full object-cover opacity-20"
+        loading="eager"
+        initial={{ scale: 1.05 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40" />
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
+        {/* breadcrumb */}
+        <motion.nav
+          className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-white/40"
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
+        >
+          <Link to="/products" className="hover:text-gold transition-colors duration-300">Catalogue</Link>
+          <span>/</span>
+          <span className="text-white/70">{category.title}</span>
+        </motion.nav>
+
+        <div className="mt-6 max-w-2xl">
+          <motion.div
+            className="text-[11px] font-bold uppercase tracking-[0.24em] text-gold"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+          >
+            Room {category.n}
+          </motion.div>
+          <motion.h1
+            className="mt-3 font-display text-4xl leading-[1.05] text-white sm:text-5xl lg:text-6xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
+          >
+            {category.title}
+          </motion.h1>
+          <motion.p
+            className="mt-5 text-sm leading-relaxed text-white/60 max-w-lg"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.5 }}
+          >
+            {category.intro}
+          </motion.p>
+          <motion.div
+            className="mt-6 flex items-center gap-3 text-xs text-white/35"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.4 }}
+          >
+            <span className="font-bold">{category.items.length} products</span>
+            <span className="h-px w-4 bg-white/20" />
+            <span>Enquire for pricing & customisation</span>
+          </motion.div>
         </div>
       </div>
     </section>
   );
 }
 
-function CategoryLayout({ category }: { category: Category }) {
-  switch (category.slug) {
-    case "gift-sets": return <GiftSetsLayout items={category.items} />;
-    case "diary-power": return <DiaryPowerLayout items={category.items} cover={category.cover} />;
-    case "lamps": return <LampsLayout items={category.items} />;
-    case "bottles": return <BottlesLayout items={category.items} />;
-    case "accessories": return <AccessoriesLayout items={category.items} />;
-  }
-}
-
-function EnquireLink({ slug }: { slug: string }) {
+// ─── Product Grid ─────────────────────────────────────────────────────────────
+function ProductGrid({ items }: { items: Product[] }) {
   return (
-    <Link
-      to="/contact"
-      search={{ product: slug }}
-      className="mt-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-navy hover:text-gold"
-    >
-      Enquire <span>→</span>
-    </Link>
-  );
-}
-
-/* ─── Gift Sets — L-shape hero + 3 tiles ────────────── */
-function GiftSetsLayout({ items }: { items: Product[] }) {
-  const [hero, ...rest] = items;
-  return (
-    <div className="mt-16 grid gap-6 lg:grid-cols-12">
-      <article className="lg:col-span-8 lg:row-span-2">
-        <div className="overflow-hidden rounded-2xl bg-ivory">
-          <img src={hero.img} alt={hero.name} loading="lazy" className="aspect-[4/3] w-full object-cover" />
-        </div>
-        <h3 className="mt-5 font-display text-3xl text-navy">{hero.name}</h3>
-        <p className="mt-2 max-w-md text-sm text-navy/70">{hero.desc}</p>
-        <EnquireLink slug={hero.slug} />
-      </article>
-      {rest.map((p) => (
-        <article key={p.slug} className="lg:col-span-4">
-          <div className="overflow-hidden rounded-2xl bg-ivory">
-            <img src={p.img} alt={p.name} loading="lazy" className="aspect-square w-full object-cover" />
-          </div>
-          <h3 className="mt-4 font-display text-xl text-navy">{p.name}</h3>
-          <p className="mt-1 text-xs text-navy/70">{p.desc}</p>
-          <EnquireLink slug={p.slug} />
-        </article>
-      ))}
-    </div>
-  );
-}
-
-/* ─── Diary & Power — Photo + Ledger ────────────────── */
-function DiaryPowerLayout({ items, cover }: { items: Product[]; cover: string }) {
-  return (
-    <div className="mt-16">
-      <div className="overflow-hidden rounded-2xl bg-ivory">
-        <img src={cover} alt="Diaries and power banks" loading="lazy" className="aspect-[21/9] w-full object-cover" />
-      </div>
-      <div className="mt-12 divide-y hairline border-y">
-        {items.map((p) => (
-          <div key={p.slug} className="grid grid-cols-12 items-center gap-4 py-6">
-            <div className="col-span-12 sm:col-span-5">
-              <div className="font-display text-2xl text-navy">{p.name}</div>
-              <div className="mt-1 text-xs text-navy/55">{p.desc}</div>
-            </div>
-            <div className="col-span-9 sm:col-span-5 text-sm text-navy/70">{p.material}</div>
-            <div className="col-span-3 sm:col-span-2 text-right">
-              <Link to="/contact" search={{ product: p.slug }} className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.2em] text-navy hover:text-gold">
-                Enquire <span>→</span>
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-/* ─── Lamps — staggered masonry ─────────────────────── */
-function LampsLayout({ items }: { items: Product[] }) {
-  return (
-    <div className="mt-16 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
-      {items.map((p, i) => (
-        <article key={p.slug} className={i === 1 ? "sm:mt-16" : i === 2 ? "sm:mt-32 lg:mt-8" : ""}>
-          <img src={p.img} alt={p.name} loading="lazy" className="aspect-[3/4] w-full rounded-2xl object-cover" />
-          <h3 className="mt-4 font-display text-2xl text-navy">{p.name}</h3>
-          <p className="mt-1 text-sm text-navy/70">{p.desc}</p>
-          <EnquireLink slug={p.slug} />
-        </article>
-      ))}
-    </div>
-  );
-}
-
-/* ─── Bottles — horizontal snap ──────────────────────── */
-function BottlesLayout({ items }: { items: Product[] }) {
-  return (
-    <div className="mt-16">
-      <div className="-mx-6 overflow-x-auto px-6 pb-3 lg:-mx-12 lg:px-12">
-        <div className="flex snap-x snap-mandatory gap-5">
-          {items.map((p) => (
-            <article key={p.slug} className="w-[260px] shrink-0 snap-start sm:w-[300px]">
-              <div className="overflow-hidden rounded-2xl bg-ivory">
-                <img src={p.img} alt={p.name} loading="lazy" className="aspect-[4/5] w-full object-cover" />
-              </div>
-              <h3 className="mt-4 font-display text-xl text-navy">{p.name}</h3>
-              <p className="mt-1 text-xs text-navy/70">{p.desc}</p>
-              <EnquireLink slug={p.slug} />
-            </article>
+    <section className="px-6 py-14 lg:px-12 lg:py-16">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {items.map((product, i) => (
+            <ProductCard key={product.slug} product={product} index={i} />
           ))}
         </div>
       </div>
-      <div className="mt-6 h-px bg-gold/60" />
-    </div>
+    </section>
   );
 }
 
-/* ─── Accessories — magazine + big numeral ──────────── */
-function AccessoriesLayout({ items }: { items: Product[] }) {
+// ─── Product Card ─────────────────────────────────────────────────────────────
+function ProductCard({ product, index }: { product: Product; index: number }) {
   return (
-    <div className="mt-16 grid gap-8 lg:grid-cols-12 lg:items-start">
-      <div className="lg:col-span-3">
-        <div className="font-display text-[10rem] leading-[0.8] text-gold/80">05</div>
-        <p className="mt-6 text-sm leading-relaxed text-navy/70">
-          The small things, gifted with intention. Often the most-remembered piece in a set.
-        </p>
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-5% 0px" }}
+      transition={{
+        duration: 0.45,
+        ease: [0.21, 0.47, 0.32, 0.98],
+        delay: index * 0.07,
+      }}
+      className="group flex flex-col rounded-2xl bg-white shadow-soft overflow-hidden transition-all duration-400 hover:shadow-luxury hover:-translate-y-1"
+    >
+      {/* image */}
+      <div className="relative overflow-hidden bg-ivory aspect-square">
+        <img
+          src={product.img}
+          alt={product.name}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        {/* Hover overlay with gold gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-navy/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        {/* Material tag revealed on hover */}
+        {product.material && (
+          <div className="absolute top-3 left-3 rounded-full bg-white/90 px-3 py-1 text-[9px] font-bold uppercase tracking-[0.15em] text-navy shadow-soft opacity-0 -translate-y-2 transition-all duration-400 group-hover:opacity-100 group-hover:translate-y-0 backdrop-blur-sm">
+            {product.material}
+          </div>
+        )}
       </div>
-      <div className="grid grid-cols-2 gap-6 lg:col-span-9">
-        {items.map((p) => (
-          <article key={p.slug}>
-            <div className="overflow-hidden rounded-2xl bg-ivory">
-              <img src={p.img} alt={p.name} loading="lazy" className="aspect-square w-full object-cover" />
-            </div>
-            <h3 className="mt-4 font-display text-xl text-navy">{p.name}</h3>
-            <p className="mt-1 text-xs text-navy/70">{p.desc}</p>
-            <EnquireLink slug={p.slug} />
-          </article>
-        ))}
+
+      {/* details */}
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <div className="flex-1">
+          <h3 className="font-display text-lg leading-tight text-navy transition-colors duration-300 group-hover:text-gold">
+            {product.name}
+          </h3>
+          <p className="mt-1.5 text-xs leading-relaxed text-navy/55">
+            {product.desc}
+          </p>
+          {product.material && (
+            <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.18em] text-gold/70 sm:hidden">
+              {product.material}
+            </p>
+          )}
+        </div>
+
+        {/* CTA */}
+        <button
+          type="button"
+          onClick={() => {
+            const text = [
+              `*Product Enquiry — Giftitude*`,
+              ``,
+              `*Product:* ${product.name}`,
+              `*Description:* ${product.desc}`,
+              product.material ? `*Material:* ${product.material}` : null,
+              ``,
+              `I'd like to enquire about this product. Please share pricing and customisation options.`,
+            ].filter(Boolean).join("\n");
+            window.open(
+              `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`,
+              "_blank",
+              "noopener,noreferrer"
+            );
+          }}
+          className="group/btn mt-5 flex w-full items-center justify-between rounded-full border border-navy/8 bg-ivory px-5 py-2.5 text-sm font-semibold text-navy transition-all duration-300 hover:border-gold/40 hover:bg-white hover:shadow-sm active:scale-[0.98]"
+        >
+          <span className="transition-colors duration-300 group-hover/btn:text-gold">Enquire</span>
+          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-navy text-white transition-all duration-300 group-hover/btn:bg-gold group-hover/btn:text-navy group-hover/btn:scale-110">
+            <ArrowRight size={13} strokeWidth={2.5} />
+          </span>
+        </button>
       </div>
-    </div>
+    </motion.article>
   );
 }
 
+// ─── Pager ────────────────────────────────────────────────────────────────────
 function CategoryPager({ current }: { current: string }) {
-  const idx = CATEGORIES.findIndex((c) => c.slug === current);
+  const idx  = CATEGORIES.findIndex((c) => c.slug === current);
   const prev = CATEGORIES[(idx - 1 + CATEGORIES.length) % CATEGORIES.length];
   const next = CATEGORIES[(idx + 1) % CATEGORIES.length];
+
   return (
-    <section className="border-t bg-ivory px-6 py-14 hairline lg:px-12">
-      <div className="mx-auto grid max-w-7xl gap-6 sm:grid-cols-2">
+    <section className="border-t border-navy/8 bg-white px-6 py-12 lg:px-12">
+      <div className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2">
         <Link
           to="/products/$category"
           params={{ category: prev.slug }}
-          className="group rounded-2xl border bg-white p-6 transition-colors hover:border-gold hairline"
+          className="group flex items-center gap-5 rounded-2xl border border-navy/8 bg-ivory p-6 transition-all duration-300 hover:border-gold/40 hover:bg-white hover:shadow-soft hover:-translate-y-0.5"
         >
-          <div className="text-[10px] uppercase tracking-[0.25em] text-navy/55">← Previous · Room {prev.n}</div>
-          <div className="mt-2 font-display text-2xl text-navy group-hover:text-gold">{prev.title}</div>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-navy/10 bg-white text-navy transition-all duration-300 group-hover:bg-navy group-hover:text-white group-hover:scale-110 group-hover:-translate-x-1">
+            <ArrowRight size={15} className="rotate-180" />
+          </div>
+          <div>
+            <div className="text-[9px] font-bold uppercase tracking-[0.24em] text-navy/35">Previous</div>
+            <div className="mt-0.5 font-display text-base text-navy group-hover:text-gold transition-colors duration-300">
+              {prev.title}
+            </div>
+          </div>
         </Link>
+
         <Link
           to="/products/$category"
           params={{ category: next.slug }}
-          className="group rounded-2xl border bg-white p-6 text-right transition-colors hover:border-gold hairline"
+          className="group flex items-center justify-end gap-5 rounded-2xl border border-navy/8 bg-ivory p-6 text-right transition-all duration-300 hover:border-gold/40 hover:bg-white hover:shadow-soft hover:-translate-y-0.5"
         >
-          <div className="text-[10px] uppercase tracking-[0.25em] text-navy/55">Next · Room {next.n} →</div>
-          <div className="mt-2 font-display text-2xl text-navy group-hover:text-gold">{next.title}</div>
+          <div>
+            <div className="text-[9px] font-bold uppercase tracking-[0.24em] text-navy/35">Next</div>
+            <div className="mt-0.5 font-display text-base text-navy group-hover:text-gold transition-colors duration-300">
+              {next.title}
+            </div>
+          </div>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-navy/10 bg-white text-navy transition-all duration-300 group-hover:bg-navy group-hover:text-white group-hover:scale-110 group-hover:translate-x-1">
+            <ArrowRight size={15} />
+          </div>
         </Link>
       </div>
     </section>

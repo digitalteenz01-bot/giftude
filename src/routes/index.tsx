@@ -32,7 +32,7 @@ function Index() {
       <Nav />
       <main>
         <Hero />
-        <div className="relative isolate flex flex-col bg-ivory pb-12 sm:pb-20">
+        <div className="relative isolate flex flex-col bg-ivory">
           <div 
             className="absolute inset-0 -z-10 bg-fixed bg-cover bg-center opacity-30"
             style={{ backgroundImage: `url(${bg2})` }}
