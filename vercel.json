@@ -4,10 +4,5 @@
   "framework": null,
   "env": {
     "NITRO_PRESET": "vercel"
-  },
-  "functions": {
-    "**/__server.func/index.mjs": {
-      "runtime": "nodejs20.x"
-    }
   }
 }
