@@ -109,13 +109,27 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 import { ReactLenis } from 'lenis/react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouter();
+  
   return (
     <QueryClientProvider client={queryClient}>
       <ReactLenis root>
-        <Outlet />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={routerState.state.location.pathname}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="flex min-h-screen flex-col"
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </ReactLenis>
     </QueryClientProvider>
   );

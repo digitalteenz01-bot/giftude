@@ -10,11 +10,11 @@ type CatSlug = "gift-sets" | "diary-power" | "lamps" | "bottles" | "accessories"
 type Cat = { title: string; desc: string; img: string; alt: string; span: string; slug: CatSlug };
 
 const cats: Cat[] = [
-  { title: "Premium Gift Sets", desc: "Curated boxes with a purpose and the finest of the finest.", img: gifts, alt: "Navy leather presentation box with pen and silk", span: "lg:col-span-6 lg:row-span-2", slug: "gift-sets" },
-  { title: "Diary & Power Banks", desc: "Leather, brass and battery in one pocket.", img: diary, alt: "Leather diary with matte power bank", span: "lg:col-span-3", slug: "diary-power" },
-  { title: "Lamps", desc: "Sculptural, warm and purposeful.", img: lamps, alt: "Sculptural brass and navy desk lamp", span: "lg:col-span-3", slug: "lamps" },
-  { title: "Bottles & Mugs", desc: "Daily rituals, considered.", img: bottles, alt: "Matte navy bottle with ivory and gold mug", span: "lg:col-span-3", slug: "bottles" },
-  { title: "Accessories", desc: "The final things that tie it together.", img: accessories, alt: "Leather cardholder, brass keychain and silk tie", span: "lg:col-span-3", slug: "accessories" },
+  { title: "Executive Tech Gifts", desc: "Curated boxes with a purpose and the finest of the finest.", img: gifts, alt: "Navy leather presentation box with pen and silk", span: "lg:col-span-6 lg:row-span-2", slug: "gift-sets" },
+  { title: "Desk & Lifestyle Accessories", desc: "Elegant organizers and functional desk accents.", img: diary, alt: "Leather diary with matte power bank", span: "lg:col-span-3", slug: "diary-power" },
+  { title: "Premium Gift Sets", desc: "Elegant silver, crystal, and decorative centerpieces.", img: lamps, alt: "Sculptural brass and navy desk lamp", span: "lg:col-span-3", slug: "lamps" },
+  { title: "Premium Drinkware", desc: "Daily rituals, considered.", img: bottles, alt: "Matte navy bottle with ivory and gold mug", span: "lg:col-span-3", slug: "bottles" },
+  { title: "Smart Office Essentials", desc: "The grace notes that tie it together.", img: accessories, alt: "Leather cardholder, brass keychain and silk tie", span: "lg:col-span-3", slug: "accessories" },
 ];
 
 const cardVariants = {

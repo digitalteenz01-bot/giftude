@@ -1,0 +1,1 @@
+var e=`/assets/testi-banner-EeZ7nFWn.webp`;export{e as t};

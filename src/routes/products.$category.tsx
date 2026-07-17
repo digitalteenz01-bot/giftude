@@ -6,8 +6,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-// WhatsApp business number — digits only with country code
-const WA_NUMBER = "919200000000";
+const WA_NUMBER = "78080255492";
 
 export const Route = createFileRoute("/products/$category")({
   loader: ({ params }) => {

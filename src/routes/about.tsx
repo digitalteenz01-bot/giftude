@@ -29,7 +29,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Inside Giftitude — a small Mumbai studio of curators and craftspeople building considered corporate gifts since 2017.",
+          "Inside Giftitude — a small studio of curators and craftspeople building considered corporate gifts since 2017.",
       },
     ],
   }),
@@ -275,10 +275,11 @@ function OurStory() {
                 <img src={portrait} alt="Aanya Rao" className="h-full w-full object-cover" />
               </div>
               <div>
-                <div className="text-sm font-semibold text-navy">Aanya Rao</div>
-                {/* meta — text-[10px] matches Testimonials role text */}
-                <div className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.2em] text-navy/50">
-                  Founder · Lower Parel, Mumbai
+                <div className="mt-4 font-display text-lg text-navy sm:text-xl">
+                  Gogul Tamilselvan
+                </div>
+                <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-navy/40">
+                  Founder
                 </div>
               </div>
             </div>
@@ -546,10 +547,10 @@ function ClosingCTA() {
                   </span>
                 </Link>
                 <a
-                  href="tel:+912200000000"
-                  className="hover-underline text-sm text-white/50 underline-offset-4 transition-colors duration-300 hover:text-white"
+                  href="tel:+9178080255492"
+                  className="group inline-flex items-center gap-3 rounded-full border border-white/20 px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:border-gold hover:bg-gold/10 hover:text-gold"
                 >
-                  or call +91 22 0000 0000
+                  or call +91 78080255492
                 </a>
               </div>
 

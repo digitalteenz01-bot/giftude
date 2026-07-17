@@ -9,11 +9,11 @@ const studioLinks = [
 ];
 
 const catalogueLinks = [
-  { label: "Gift Sets",        slug: "gift-sets"    },
-  { label: "Diary & Power",    slug: "diary-power"  },
-  { label: "Lamps",            slug: "lamps"        },
-  { label: "Bottles & Mugs",   slug: "bottles"      },
-  { label: "Accessories",      slug: "accessories"  },
+  { label: "Executive Tech Gifts",         slug: "gift-sets"    },
+  { label: "Desk & Lifestyle Accessories", slug: "diary-power"  },
+  { label: "Premium Gift Sets",            slug: "lamps"        },
+  { label: "Premium Drinkware",            slug: "bottles"      },
+  { label: "Smart Office Essentials",      slug: "accessories"  },
 ];
 
 export function Footer() {
@@ -135,13 +135,10 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="tel:+912200000000"
+                <a href="tel:+9178080255492"
                   className="hover-underline inline-block text-sm text-white/60 transition-all duration-300 hover:text-gold hover:translate-x-1">
-                  +91 22 0000 0000
+                  +91 78080255492
                 </a>
-              </li>
-              <li className="text-sm leading-relaxed text-white/60">
-                Lower Parel, Mumbai,<br />Maharashtra, India
               </li>
             </ul>
           </div>

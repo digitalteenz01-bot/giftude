@@ -31,8 +31,8 @@ export function CTA() {
                   <ArrowRight strokeWidth={2.5} size={20} />
                 </span>
               </a>
-              <a href="tel:+912200000000" className="text-sm text-ivory/80 underline-offset-4 hover:underline">
-                or call +91 22 0000 0000
+              <a href="tel:+9178080255492" className="text-sm text-ivory/80 underline-offset-4 hover:underline">
+                or call +91 78080255492
               </a>
             </div>
           </div>

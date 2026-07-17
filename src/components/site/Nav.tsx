@@ -93,7 +93,7 @@ export function Nav({ variant = "dark" }: NavProps) {
             <img
               src={logo}
               alt="Giftitude"
-              className="h-10 w-auto transition-all duration-500 group-hover:scale-105"
+              className="h-16 w-auto transition-all duration-500 group-hover:scale-105"
               style={{
                 filter: scrolled || variant === "dark"
                   ? "brightness(0) invert(1)"   // white on dark bg
@@ -124,7 +124,7 @@ export function Nav({ variant = "dark" }: NavProps) {
             {/* Desktop CTA */}
             <Link
               to="/contact"
-              className="group hidden items-center gap-3 rounded-full bg-white pl-5 pr-1.5 py-1.5 text-sm font-semibold text-navy transition-all duration-300 hover:bg-white/90 hover:shadow-soft hover:scale-[1.02] active:scale-[0.98] md:inline-flex"
+              className="group hidden items-center gap-3 rounded-full bg-white pl-5 pr-1.5 py-1.5 text-sm font-semibold text-navy transition-all duration-300 hover:bg-white/90 hover:shadow-soft hover:scale-105 active:scale-[0.98] md:inline-flex"
             >
               Get a quote
               <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gold text-navy transition-all duration-300 group-hover:translate-x-0.5 group-hover:bg-navy group-hover:text-gold font-bold">
@@ -246,16 +246,16 @@ export function Nav({ variant = "dark" }: NavProps) {
 
               {/* contact strip */}
               <motion.div
-                className="mt-8 space-y-2 border-t border-white/10 pt-6"
+                className="mt-8 space-y-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.3 }}
               >
+                <a href="tel:+9178080255492" className="block text-sm text-white/40 transition-all duration-300 hover:text-white hover:translate-x-1">
+                  +91 78080255492
+                </a>
                 <a href="mailto:hello@giftitude.in" className="block text-sm text-white/40 transition-all duration-300 hover:text-white hover:translate-x-1">
                   hello@giftitude.in
-                </a>
-                <a href="tel:+912200000000" className="block text-sm text-white/40 transition-all duration-300 hover:text-white hover:translate-x-1">
-                  +91 22 0000 0000
                 </a>
               </motion.div>
             </motion.div>

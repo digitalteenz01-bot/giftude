@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import why from "@/assets/why-craft.jpg";
 
 const features = [
-  { icon: Star, t: "Premium quality", d: "Materials, sourcing, finishes and inspections in our Mumbai studio." },
+  { icon: Star, t: "Premium quality", d: "Materials, sourcing, finishes and inspections in our studio." },
   { icon: PenTool, t: "Customisation", d: "Foil, deboss, one-name and bespoke packaging — all in-house." },
   { icon: Package, t: "Bulk orders", d: "From 25 to 25,000 units, on-time, every time." },
   { icon: Truck, t: "Pan-India delivery", d: "White-glove logistics to 19,000+ pin codes." },

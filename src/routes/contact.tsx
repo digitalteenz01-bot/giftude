@@ -24,11 +24,11 @@ export const Route = createFileRoute("/contact")({
 });
 
 const CATEGORIES = [
-  { value: "gift-sets",    label: "Premium Gift Sets" },
-  { value: "diary-power", label: "Diary & Power Banks" },
-  { value: "lamps",       label: "Lamps" },
-  { value: "bottles",     label: "Bottles & Mugs" },
-  { value: "accessories", label: "Accessories" },
+  { value: "gift-sets",   label: "Executive Tech Gifts" },
+  { value: "diary-power", label: "Desk & Lifestyle Accessories" },
+  { value: "lamps",       label: "Premium Gift Sets" },
+  { value: "bottles",     label: "Premium Drinkware" },
+  { value: "accessories", label: "Smart Office Essentials" },
   { value: "custom",      label: "Custom / Not sure yet" },
 ];
 
@@ -110,8 +110,7 @@ function ContactPage() {
         >
           {[
             { label: "Email",  value: "hello@giftitude.in",  href: "mailto:hello@giftitude.in" },
-            { label: "Phone",  value: "+91 22 0000 0000",     href: "tel:+912200000000" },
-            { label: "Studio", value: "Lower Parel, Mumbai",  href: null },
+            { label: "Phone",  value: "+91 78080255492",     href: "tel:+9178080255492" },
             { label: "Hours",  value: "Mon – Sat · 10–19 IST", href: null },
           ].map(({ label, value, href }, i) => (
             <motion.div
@@ -175,7 +174,7 @@ function ContactForm({ productSlug }: { productSlug?: string }) {
     ].filter(Boolean).join("\n");
 
     // Replace with your WhatsApp business number (digits only, with country code)
-    const waNumber = "919200000000";
+    const waNumber = "78080255492";
     window.open(
       `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`,
       "_blank",
@@ -296,7 +295,7 @@ function ContactForm({ productSlug }: { productSlug?: string }) {
           >
             <button
               type="submit"
-              className="group inline-flex items-center gap-4 rounded-full bg-navy pl-7 pr-2 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-navy-soft hover:shadow-luxury hover:scale-[1.02] active:scale-[0.98]"
+              className="group inline-flex items-center gap-4 rounded-full bg-navy pl-7 pr-2 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-navy-soft hover:shadow-luxury hover:scale-105 active:scale-[0.98]"
             >
               {sent ? "Re-open on WhatsApp" : "Send enquiry"}
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold text-navy font-bold transition-all duration-300 group-hover:translate-x-1 group-hover:bg-white group-hover:text-navy">

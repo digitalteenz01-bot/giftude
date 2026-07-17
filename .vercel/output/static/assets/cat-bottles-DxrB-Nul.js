@@ -1,0 +1,1 @@
+var e=`/assets/cat-lamps-CtDmqNxZ.jpg`,t=`/assets/cat-bottles-BzWCApao.jpg`;export{e as n,t};

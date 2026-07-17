@@ -106,7 +106,7 @@ export function Hero() {
               >
                 <a
                   href="#contact"
-                  className="group inline-flex items-center gap-4 rounded-full bg-ivory pl-7 pr-2 py-2 text-sm font-semibold text-navy shadow-soft transition-all duration-300 hover:bg-white hover:shadow-luxury hover:scale-[1.02] active:scale-[0.98]"
+                  className="group inline-flex items-center gap-4 rounded-full bg-ivory pl-7 pr-2 py-2 text-sm font-semibold text-navy shadow-soft transition-all duration-300 hover:bg-white hover:shadow-luxury hover:scale-105 active:scale-[0.98]"
                 >
                   Request a quotation
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold text-navy transition-all duration-300 group-hover:translate-x-1 group-hover:bg-navy group-hover:text-gold font-bold text-lg">
