@@ -93,7 +93,7 @@ export function Nav({ variant = "dark" }: NavProps) {
             <img
               src={logo}
               alt="Giftitude"
-              className="h-16 w-auto transition-all duration-500 group-hover:scale-105"
+              className="h-12 w-auto transition-all duration-500 group-hover:scale-105"
               style={{
                 filter: scrolled || variant === "dark"
                   ? "brightness(0) invert(1)"   // white on dark bg

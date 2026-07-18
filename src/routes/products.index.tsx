@@ -127,7 +127,7 @@ function ProductsIndex() {
                         src={c.cover}
                         alt={c.alt}
                         loading="lazy"
-                        className="h-16 w-24 object-cover transition-transform duration-700 group-hover:scale-110 sm:h-20 sm:w-32 lg:h-24 lg:w-40"
+                        className="h-24 w-24 object-contain transition-transform duration-700 group-hover:scale-110 sm:h-20 sm:w-32 sm:object-cover lg:h-24 lg:w-40"
                       />
                     </div>
 

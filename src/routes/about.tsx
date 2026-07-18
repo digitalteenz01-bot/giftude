@@ -269,20 +269,6 @@ function OurStory() {
               ))}
             </div>
 
-            {/* founder byline */}
-            <div className="mt-10 flex items-center gap-4 border-t border-navy/8 pt-6">
-              <div className="h-10 w-10 overflow-hidden rounded-full">
-                <img src={portrait} alt="Aanya Rao" className="h-full w-full object-cover" />
-              </div>
-              <div>
-                <div className="mt-4 font-display text-lg text-navy sm:text-xl">
-                  Gogul Tamilselvan
-                </div>
-                <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.2em] text-navy/40">
-                  Founder
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>

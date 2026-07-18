@@ -94,7 +94,7 @@ export function Categories() {
                 </div>
 
                 {/* Content */}
-                <div className="relative flex h-full min-h-[250px] flex-col justify-end p-6 text-ivory sm:p-8">
+                <div className="relative flex h-full min-h-[320px] sm:min-h-[250px] flex-col justify-end p-6 text-ivory sm:p-8">
                   {/* Title with slight slide up on hover */}
                   <div className="font-display text-2xl leading-tight sm:text-3xl transition-transform duration-500 group-hover:-translate-y-1">
                     {c.title}
