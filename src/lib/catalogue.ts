@@ -35,6 +35,7 @@ import execTech26 from "@/assets/executive tech gifts/img (26).webp";
 import execTech27 from "@/assets/executive tech gifts/img (27).webp";
 import execTech28 from "@/assets/executive tech gifts/img (28).webp";
 import execTech29 from "@/assets/executive tech gifts/img (29).webp";
+import execTech30 from "@/assets/executive tech gifts/img (30).webp";
 import deskAcc1 from "@/assets/desk & life accessories/img (1).png";
 import deskAcc2 from "@/assets/desk & life accessories/img (2).png";
 import deskAcc3 from "@/assets/desk & life accessories/img (3).png";
@@ -176,6 +177,7 @@ export const CATEGORIES: Category[] = [
       { slug: "notebook-organizer-set", name: "Notebook Organizer Set", desc: "", img: execTech27 },
       { slug: "leather-journal-set", name: "Leather Journal Set", desc: "", img: execTech28 },
       { slug: "premium-flask-gift-set", name: "Premium Flask Gift Set", desc: "", img: execTech29 },
+      { slug: "premium-cotton-polo-tshirt", name: "Premium Cotton Polo T-Shirt", desc: "", img: execTech30 },
     ],
   },
   {

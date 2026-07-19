@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
 
@@ -59,117 +59,98 @@ export function Nav({ variant = "dark" }: NavProps) {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
-  const navBg = scrolled
-    ? "bg-navy/90 border-white/10 backdrop-blur-md shadow-lg px-5 py-2.5"
-    : variant === "light"
-      ? "bg-white border-navy/10 shadow-soft px-6 py-3.5"
-      : "bg-white/5 border-white/10 backdrop-blur-sm px-6 py-3.5";
-
-  const logoColor = scrolled
-    ? "text-white"
-    : variant === "light" ? "text-navy" : "text-white";
-
-  const linkActive = scrolled
-    ? "text-white font-medium"
-    : variant === "light" ? "text-navy font-medium" : "text-white font-medium";
-
-  const linkInactive = scrolled
-    ? "text-white/70 hover:text-white"
-    : variant === "light" ? "text-navy/55 hover:text-navy" : "text-white/70 hover:text-white";
-
-  // Hamburger icon color
-  const iconColor = scrolled
-    ? "text-white"
-    : variant === "light" ? "text-navy" : "text-white";
-
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4 sm:pt-6">
-        <nav
-          className={`flex w-full max-w-6xl items-center justify-between rounded-full border transition-all duration-500 ${navBg}`}
-        >
-          {/* Logo */}
-          <Link to="/" className="group flex items-center" onClick={() => setMenuOpen(false)}>
-            <img
-              src={logo}
-              alt="Giftitude"
-              className="h-12 w-auto transition-all duration-500 group-hover:scale-105"
-              style={{
-                filter: scrolled || variant === "dark"
-                  ? "brightness(0) invert(1)"   // white on dark bg
-                  : "none",                      // natural on light bg
-              }}
-            />
-          </Link>
+      <header className="fixed inset-x-0 top-0 z-50">
+        {/* Top accent bar */}
+        <div className="h-[3px] bg-gradient-to-r from-gold via-gold-soft to-gold" />
 
-          {/* Desktop links */}
-          <ul className="hidden items-center gap-8 md:flex">
-            {links.map((l) => (
-              <li key={l.to}>
-                <Link
-                  to={l.to}
-                  activeOptions={{ exact: l.exact }}
-                  activeProps={{ className: linkActive }}
-                  inactiveProps={{ className: linkInactive }}
-                  className="hover-underline text-sm transition-colors duration-300"
-                >
-                  {l.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        {/* Main nav */}
+        <div className={`w-full bg-white transition-all duration-500 ${scrolled ? "shadow-md" : "shadow-sm"}`}>
+          <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-3.5 lg:px-8">
 
-          {/* Right side */}
-          <div className="flex items-center gap-3">
-            {/* Desktop CTA */}
-            <Link
-              to="/contact"
-              className="group hidden items-center gap-3 rounded-full bg-white pl-5 pr-1.5 py-1.5 text-sm font-semibold text-navy transition-all duration-300 hover:bg-white/90 hover:shadow-soft hover:scale-105 active:scale-[0.98] md:inline-flex"
-            >
-              Get a quote
-              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gold text-navy transition-all duration-300 group-hover:translate-x-0.5 group-hover:bg-navy group-hover:text-gold font-bold">
-                <ArrowRight strokeWidth={2.5} size={14} />
-              </span>
+            {/* Logo */}
+            <Link to="/" className="group flex items-center" onClick={() => setMenuOpen(false)}>
+              <img
+                src={logo}
+                alt="Giftitude"
+                className="h-12 w-auto transition-all duration-300 group-hover:opacity-80"
+              />
             </Link>
 
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setMenuOpen((o) => !o)}
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-300 md:hidden ${
-                scrolled
-                  ? "border-white/20 text-white hover:bg-white/10 hover:scale-110"
-                  : variant === "light"
-                    ? "border-navy/15 text-navy hover:bg-navy/5 hover:scale-110"
-                    : "border-white/20 text-white hover:bg-white/10 hover:scale-110"
-              }`}
-            >
-              <AnimatePresence mode="wait">
-                {menuOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+            {/* Desktop links — centered */}
+            <ul className="hidden items-center gap-10 md:flex">
+              {links.map((l) => (
+                <li key={l.to}>
+                  <Link
+                    to={l.to}
+                    activeOptions={{ exact: l.exact }}
+                    activeProps={{ className: "text-navy font-semibold" }}
+                    inactiveProps={{ className: "text-navy/50 hover:text-navy" }}
+                    className="relative text-[13px] uppercase tracking-[0.08em] transition-colors duration-300 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
                   >
-                    <X size={18} strokeWidth={2} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu size={18} strokeWidth={2} />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
-          </div>
-        </nav>
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Right side */}
+            <div className="flex items-center gap-4">
+              {/* Phone number — desktop only */}
+              <a
+                href="tel:+9178080255492"
+                className="hidden items-center gap-2 text-[13px] text-navy/60 transition-colors duration-300 hover:text-gold lg:flex"
+              >
+                <Phone size={14} strokeWidth={2} />
+                <span>+91 78080 25549</span>
+              </a>
+
+              {/* Divider */}
+              <div className="hidden h-5 w-px bg-navy/10 lg:block" />
+
+              {/* Desktop CTA */}
+              <Link
+                to="/contact"
+                className="group hidden items-center gap-2.5 rounded-full bg-navy px-5 py-2 text-[13px] font-semibold text-white transition-all duration-300 hover:bg-gold hover:text-navy hover:shadow-soft active:scale-[0.97] md:inline-flex"
+              >
+                Contact
+                <ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+              </Link>
+
+              {/* Mobile hamburger */}
+              <button
+                onClick={() => setMenuOpen((o) => !o)}
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-navy/10 text-navy transition-all duration-300 hover:bg-navy/5 hover:border-navy/20 md:hidden"
+              >
+                <AnimatePresence mode="wait">
+                  {menuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <X size={20} strokeWidth={2} />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Menu size={20} strokeWidth={2} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </button>
+            </div>
+          </nav>
+        </div>
       </header>
 
       {/* ── Mobile drawer ── */}
@@ -188,7 +169,7 @@ export function Nav({ variant = "dark" }: NavProps) {
 
             {/* slide-down panel */}
             <motion.div
-              className="fixed inset-x-0 top-0 z-40 bg-navy px-6 pt-24 pb-10 md:hidden"
+              className="fixed inset-x-0 top-0 z-40 bg-white px-6 pt-24 pb-10 shadow-luxury md:hidden"
               variants={mobileMenuVariants}
               initial="hidden"
               animate="visible"
@@ -207,9 +188,9 @@ export function Nav({ variant = "dark" }: NavProps) {
                     <Link
                       to={l.to}
                       activeOptions={{ exact: l.exact }}
-                      activeProps={{ className: "text-white" }}
-                      inactiveProps={{ className: "text-white/55" }}
-                      className="block rounded-2xl px-4 py-4 font-display text-2xl transition-all duration-300 hover:bg-white/5 hover:text-white hover:translate-x-2"
+                      activeProps={{ className: "text-navy" }}
+                      inactiveProps={{ className: "text-navy/50" }}
+                      className="block rounded-xl px-4 py-3.5 font-display text-xl transition-all duration-300 hover:bg-ivory hover:text-navy hover:translate-x-2"
                       onClick={() => setMenuOpen(false)}
                     >
                       {l.label}
@@ -220,7 +201,7 @@ export function Nav({ variant = "dark" }: NavProps) {
 
               {/* divider */}
               <motion.div
-                className="my-6 h-px bg-white/10"
+                className="my-6 h-px bg-navy/10"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.4, duration: 0.4 }}
@@ -235,26 +216,25 @@ export function Nav({ variant = "dark" }: NavProps) {
                 <Link
                   to="/contact"
                   onClick={() => setMenuOpen(false)}
-                  className="group inline-flex items-center gap-4 rounded-full bg-gold pl-7 pr-2 py-2 text-sm font-semibold text-navy transition-all duration-300 hover:bg-gold-soft hover:scale-[1.02] active:scale-[0.98]"
+                  className="group inline-flex items-center gap-3 rounded-full bg-navy px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-gold hover:text-navy active:scale-[0.98]"
                 >
-                  Get a quote
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy text-gold font-bold transition-transform duration-300 group-hover:translate-x-1">
-                    <ArrowRight strokeWidth={2.5} size={16} />
-                  </span>
+                  Get a Quote
+                  <ArrowRight size={14} strokeWidth={2.5} className="transition-transform duration-300 group-hover:translate-x-0.5" />
                 </Link>
               </motion.div>
 
-              {/* contact strip */}
+              {/* contact info */}
               <motion.div
-                className="mt-8 space-y-4"
+                className="mt-8 space-y-3 border-t border-navy/8 pt-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.3 }}
               >
-                <a href="tel:+9178080255492" className="block text-sm text-white/40 transition-all duration-300 hover:text-white hover:translate-x-1">
-                  +91 78080255492
+                <a href="tel:+9178080255492" className="flex items-center gap-2 text-sm text-navy/50 transition-colors duration-300 hover:text-gold">
+                  <Phone size={14} />
+                  +91 78080 25549
                 </a>
-                <a href="mailto:hello@giftitude.in" className="block text-sm text-white/40 transition-all duration-300 hover:text-white hover:translate-x-1">
+                <a href="mailto:hello@giftitude.in" className="block text-sm text-navy/50 transition-colors duration-300 hover:text-gold">
                   hello@giftitude.in
                 </a>
               </motion.div>

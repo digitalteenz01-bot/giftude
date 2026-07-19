@@ -1,20 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import gifts from "@/assets/cat-gift-sets.jpg";
-import diary from "@/assets/cat-diary.jpg";
-import lamps from "@/assets/cat-lamps.jpg";
-import bottles from "@/assets/cat-bottles.jpg";
-import accessories from "@/assets/cat-accessories.jpg";
+import { CATEGORIES } from "@/lib/catalogue";
 
-type CatSlug = "gift-sets" | "diary-power" | "lamps" | "bottles" | "accessories";
-type Cat = { title: string; desc: string; img: string; alt: string; span: string; slug: CatSlug };
+type Cat = { title: string; desc: string; img: string; alt: string; span: string; slug: string };
 
 const cats: Cat[] = [
-  { title: "Executive Tech Gifts", desc: "Curated boxes with a purpose and the finest of the finest.", img: gifts, alt: "Navy leather presentation box with pen and silk", span: "lg:col-span-6 lg:row-span-2", slug: "gift-sets" },
-  { title: "Desk & Lifestyle Accessories", desc: "Elegant organizers and functional desk accents.", img: diary, alt: "Leather diary with matte power bank", span: "lg:col-span-3", slug: "diary-power" },
-  { title: "Premium Gift Sets", desc: "Elegant silver, crystal, and decorative centerpieces.", img: lamps, alt: "Sculptural brass and navy desk lamp", span: "lg:col-span-3", slug: "lamps" },
-  { title: "Premium Drinkware", desc: "Daily rituals, considered.", img: bottles, alt: "Matte navy bottle with ivory and gold mug", span: "lg:col-span-3", slug: "bottles" },
-  { title: "Smart Office Essentials", desc: "The grace notes that tie it together.", img: accessories, alt: "Leather cardholder, brass keychain and silk tie", span: "lg:col-span-3", slug: "accessories" },
+  { title: CATEGORIES[0].title, desc: CATEGORIES[0].tagline, img: CATEGORIES[0].items[0].img, alt: CATEGORIES[0].alt, span: "lg:col-span-6 lg:row-span-2", slug: CATEGORIES[0].slug },
+  { title: CATEGORIES[1].title, desc: CATEGORIES[1].tagline, img: CATEGORIES[1].items[0].img, alt: CATEGORIES[1].alt, span: "lg:col-span-3", slug: CATEGORIES[1].slug },
+  { title: CATEGORIES[2].title, desc: CATEGORIES[2].tagline, img: CATEGORIES[2].items[0].img, alt: CATEGORIES[2].alt, span: "lg:col-span-3", slug: CATEGORIES[2].slug },
+  { title: CATEGORIES[3].title, desc: CATEGORIES[3].tagline, img: CATEGORIES[3].items[0].img, alt: CATEGORIES[3].alt, span: "lg:col-span-3", slug: CATEGORIES[3].slug },
+  { title: CATEGORIES[4].title, desc: CATEGORIES[4].tagline, img: CATEGORIES[4].items[0].img, alt: CATEGORIES[4].alt, span: "lg:col-span-3", slug: CATEGORIES[4].slug },
 ];
 
 const cardVariants = {

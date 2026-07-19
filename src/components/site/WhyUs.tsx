@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import why from "@/assets/why-craft.jpg";
 
 const features = [
-  { icon: Star, t: "Premium quality", d: "Materials, sourcing, finishes and inspections in our studio." },
-  { icon: PenTool, t: "Customisation", d: "Foil, deboss, one-name and bespoke packaging — all in-house." },
-  { icon: Package, t: "Bulk orders", d: "From 25 to 25,000 units, on-time, every time." },
-  { icon: Truck, t: "Pan-India delivery", d: "White-glove logistics to 19,000+ pin codes." },
+  { icon: Star, t: "Uncompromising Quality", d: "Every product is carefully sourced, inspected, and finished to meet the highest standards." },
+  { icon: PenTool, t: "Tailored to Your Brand", d: "Custom branding, premium packaging, and personalized gifting experiences — all under one roof." },
+  { icon: Package, t: "Scalable for Every Business", d: "From boutique orders to enterprise gifting, delivered with precision and consistency." },
+  { icon: Truck, t: "Reliable Global Delivery", d: "Seamless fulfillment across Canada and worldwide, delivered with care." },
 ];
 
 const cardVariants = {
@@ -60,10 +60,13 @@ export function WhyUs() {
             >
               <div className="text-[11px] font-bold uppercase tracking-[0.24em] text-gold">Our Ethos</div>
               <h2 className="mt-4 font-display text-4xl leading-[1.1] text-navy sm:text-5xl lg:text-6xl">
-                Made by hand.
+                Designed for Business.
                 <br />
-                <span className="text-gold">Mostly</span> by people.
+                <span className="text-gold">Chosen</span> by People.
               </h2>
+              <p className="mt-5 max-w-lg text-sm leading-relaxed text-navy/65">
+                Exceptional gifting experiences for clients, teams, and partners.
+              </p>
             </motion.div>
 
             <div className="mt-12 grid gap-5 sm:grid-cols-2">
