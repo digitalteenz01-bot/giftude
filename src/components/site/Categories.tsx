@@ -40,9 +40,9 @@ export function Categories() {
           >
             <div className="text-xs font-semibold uppercase tracking-[0.24em] text-gold">Catalogue</div>
             <h2 className="mt-4 font-display text-5xl leading-[1.05] text-navy sm:text-6xl">
-              Five rooms,
+              Every Collection,
               <br />
-              <span className="text-gold">one house.</span>
+              <span className="text-gold">A Lasting Impression.</span>
             </h2>
           </motion.div>
           <motion.p
@@ -52,9 +52,8 @@ export function Categories() {
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.6, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
-            Every category is curated by hand — no marketplace,
-            no third-party warehouses. What we share is
-            what we make.
+            Explore premium gifting solutions designed to strengthen
+            relationships, celebrate achievements, and elevate your brand.
           </motion.p>
         </div>
 

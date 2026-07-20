@@ -1,6 +1,6 @@
 import { Star, PenTool, Package, Truck } from "lucide-react";
 import { motion } from "framer-motion";
-import why from "@/assets/why-craft.jpg";
+import why from "@/assets/imag1.webp";
 
 const features = [
   { icon: Star, t: "Uncompromising Quality", d: "Every product is carefully sourced, inspected, and finished to meet the highest standards." },

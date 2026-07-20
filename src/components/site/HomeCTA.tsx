@@ -20,9 +20,9 @@ export function HomeCTA() {
           >
             <div className="text-xs uppercase tracking-[0.24em] text-gold animate-shimmer bg-clip-text">Begin a brief</div>
             <h2 className="mt-5 font-display text-5xl leading-[1.05] sm:text-6xl lg:text-7xl">
-              Tell us who you're gifting.
+              You Bring the Occasion.
               <br />
-              We'll do the rest.
+              We Create the Experience.
             </h2>
           </motion.div>
           <motion.p
@@ -32,8 +32,9 @@ export function HomeCTA() {
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.5, delay: 0.15, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
-            Share occasion, count and a sense of the recipient. A curator
-            will reply within one working day with a proposal.
+            From product selection and custom branding to premium packaging and
+            worldwide delivery, we handle every detail — so you can focus on building
+            meaningful relationships.
           </motion.p>
           <motion.div
             className="mt-10 flex flex-wrap items-center gap-5"
