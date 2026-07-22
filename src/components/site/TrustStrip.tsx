@@ -1,40 +1,43 @@
-import { Gift, Package, Award, IndianRupee } from "lucide-react";
+import { Package, Palette, LayoutGrid, Users } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const stats = [
   {
-    icon: Gift,
-    value: "1,200+",
-    numericValue: 1200,
-    suffix: "+",
-    label: "Brands & Clients",
-    note: "Partnered",
-  },
-  {
     icon: Package,
     value: "500+",
     numericValue: 500,
+    prefix: "",
     suffix: "+",
-    label: "Curated Products",
-    note: "In Our Catalogue",
+    label: "Premium",
+    note: "Products",
   },
   {
-    icon: Award,
-    value: "08",
-    numericValue: 8,
-    suffix: "",
-    label: "Years of Crafting",
-    note: "Since 2017",
+    icon: Palette,
+    value: "100%",
+    numericValue: 100,
+    prefix: "",
+    suffix: "%",
+    label: "Custom",
+    note: "Branding",
   },
   {
-    icon: IndianRupee,
-    value: "₹20Cr+",
-    numericValue: 20,
-    prefix: "₹",
-    suffix: "Cr+",
-    label: "Gifts Delivered",
-    note: "Across India",
+    icon: LayoutGrid,
+    value: "50+",
+    numericValue: 50,
+    prefix: "",
+    suffix: "+",
+    label: "Product",
+    note: "Categories",
+  },
+  {
+    icon: Users,
+    value: "100%",
+    numericValue: 100,
+    prefix: "",
+    suffix: "%",
+    label: "Client",
+    note: "Focused",
   },
 ];
 

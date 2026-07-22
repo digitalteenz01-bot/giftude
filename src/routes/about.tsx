@@ -4,6 +4,8 @@ import { Footer } from "@/components/site/Footer";
 import aboutHero from "@/assets/about us hero.webp";
 import bg2 from "@/assets/background2.webp";
 import craft from "@/assets/why-craft.jpg";
+import image2 from "@/assets/image2.jpeg";
+import image3 from "@/assets/image3.jpeg";
 import testiBanner from "@/assets/testi-banner.webp";
 import ctaBanner from "@/assets/cta banner.webp";
 import gifts from "@/assets/cat-gift-sets.jpg";
@@ -174,7 +176,7 @@ function OurStory() {
             <div className="relative group">
               <div className="overflow-hidden rounded-[2rem] shadow-luxury transition-shadow duration-500 group-hover:shadow-[0_35px_70px_-30px_oklch(0.18_0.04_250_/_0.3)]">
                 <img
-                  src={craft}
+                  src={image2}
                   alt="Premium corporate gifts by Giftitude"
                   loading="lazy"
                   className="w-full aspect-[4/5] object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
@@ -197,32 +199,14 @@ function OurStory() {
             </div>
             <h2 className="mt-4 font-display text-4xl leading-[1.1] text-navy sm:text-5xl lg:text-6xl">
               Elevating Corporate Gifting{" "}
-              <span className="italic text-gold">with Purpose.</span>
+              <span className="italic text-gold">with Purpose</span>
             </h2>
 
             <div className="mt-8 space-y-5 text-sm leading-relaxed text-navy/70">
               <p>
-                We specialize in sourcing, customizing, and delivering high-quality
-                corporate gifts that leave a lasting impression. From employee
-                appreciation and client onboarding to executive gifting, promotional
-                campaigns, conferences, and festive celebrations, we provide solutions
-                tailored to every business need.
-              </p>
-              <p>
-                Working with trusted manufacturing partners across global markets, we
-                combine exceptional craftsmanship, premium materials, and modern
-                branding techniques to create gifts that reflect your company's identity.
-              </p>
-              <p>
-                Every product is carefully selected to meet the highest standards of
-                quality, functionality, and presentation. Our goal is simple — to help
-                organizations strengthen relationships, celebrate achievements, and
-                enhance their brand through meaningful gifting experiences.
-              </p>
-              <p className="font-medium text-navy/85">
-                Whether you require a single premium executive gift or thousands of
-                customized promotional products, Giftitude delivers dependable service,
-                competitive pricing, and on-time delivery.
+                Giftitude is a Canadian corporate gifting company dedicated to helping
+                businesses build stronger relationships through thoughtfully curated
+                premium gifts.
               </p>
             </div>
           </div>
@@ -335,7 +319,7 @@ function MissionVisionSection() {
               alt="Premium corporate gifts"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/70 to-navy/40 transition-opacity duration-300 group-hover:from-navy/95" />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-transparent transition-opacity duration-300 group-hover:from-navy/90" />
 
             <div className="relative p-8 sm:p-10 flex flex-col justify-end min-h-[280px] sm:min-h-[320px]">
               <div className="flex items-center gap-4 mb-4">
@@ -364,11 +348,11 @@ function MissionVisionSection() {
           >
             {/* Background image */}
             <img
-              src={craft}
+              src={image3}
               alt="Corporate gifting vision"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/70 to-navy/40 transition-opacity duration-300 group-hover:from-navy/95" />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/40 to-transparent transition-opacity duration-300 group-hover:from-navy/90" />
 
             <div className="relative p-8 sm:p-10 flex flex-col justify-end min-h-[280px] sm:min-h-[320px]">
               <div className="flex items-center gap-4 mb-4">

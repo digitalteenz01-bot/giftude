@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.png";
+import { CATEGORIES } from "@/lib/catalogue";
 
 const links = [
   { label: "Home",     to: "/" as const,        exact: true  },
@@ -74,14 +75,14 @@ export function Nav({ variant = "dark" }: NavProps) {
               <img
                 src={logo}
                 alt="Giftitude"
-                className="h-12 w-auto transition-all duration-300 group-hover:opacity-80"
+                className="h-16 md:h-20 w-auto transition-all duration-300 group-hover:opacity-80"
               />
             </Link>
 
             {/* Desktop links — centered */}
             <ul className="hidden items-center gap-10 md:flex">
               {links.map((l) => (
-                <li key={l.to}>
+                <li key={l.to} className="relative group py-2">
                   <Link
                     to={l.to}
                     activeOptions={{ exact: l.exact }}
@@ -91,23 +92,29 @@ export function Nav({ variant = "dark" }: NavProps) {
                   >
                     {l.label}
                   </Link>
+                  {l.label === "Products" && (
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                      <div className="bg-white rounded-xl shadow-luxury py-2 min-w-[240px] border border-navy/5 flex flex-col">
+                        {CATEGORIES.map((c) => (
+                          <Link
+                            key={c.slug}
+                            to="/products/$category"
+                            params={{ category: c.slug }}
+                            className="px-5 py-3 text-[13px] font-medium text-navy/70 hover:text-navy hover:bg-ivory transition-colors"
+                          >
+                            {c.title}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
 
             {/* Right side */}
             <div className="flex items-center gap-4">
-              {/* Phone number — desktop only */}
-              <a
-                href="tel:+9178080255492"
-                className="hidden items-center gap-2 text-[13px] text-navy/60 transition-colors duration-300 hover:text-gold lg:flex"
-              >
-                <Phone size={14} strokeWidth={2} />
-                <span>+91 78080 25549</span>
-              </a>
 
-              {/* Divider */}
-              <div className="hidden h-5 w-px bg-navy/10 lg:block" />
 
               {/* Desktop CTA */}
               <Link
@@ -195,6 +202,21 @@ export function Nav({ variant = "dark" }: NavProps) {
                     >
                       {l.label}
                     </Link>
+                    {l.label === "Products" && (
+                      <div className="pl-6 mt-1 mb-2 flex flex-col space-y-2.5 border-l-2 border-navy/10 ml-6">
+                        {CATEGORIES.map((c) => (
+                          <Link
+                            key={c.slug}
+                            to="/products/$category"
+                            params={{ category: c.slug }}
+                            className="text-base text-navy/60 hover:text-navy transition-colors"
+                            onClick={() => setMenuOpen(false)}
+                          >
+                            {c.title}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </motion.li>
                 ))}
               </ul>

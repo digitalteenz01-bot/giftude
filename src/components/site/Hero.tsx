@@ -94,7 +94,7 @@ export function Hero() {
         <div className="mx-auto w-full max-w-7xl">
           <div className="mt-10 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:items-center lg:gap-8">
             {/* Headline column */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 text-center sm:text-left">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}
@@ -131,7 +131,7 @@ export function Hero() {
 
                   {/* Paragraph fade up */}
                   <motion.p
-                    className="mt-8 max-w-md text-base leading-relaxed text-white/80"
+                    className="mt-8 max-w-md mx-auto sm:mx-0 text-base leading-relaxed text-white/80"
                     variants={fadeUp}
                     custom={0.9}
                   >
@@ -142,7 +142,7 @@ export function Hero() {
 
               {/* Buttons — always visible */}
               <motion.div
-                className="mt-10 flex flex-wrap items-center gap-5"
+                className="mt-10 flex flex-wrap items-center justify-center sm:justify-start gap-5"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.1, duration: 0.6 }}

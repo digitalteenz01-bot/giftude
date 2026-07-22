@@ -45,7 +45,7 @@ function ProductsIndex() {
 
         {/* ── Masthead ── */}
         <FadeIn>
-          <section className="relative h-screen flex items-end overflow-hidden bg-navy">
+          <section className="relative h-screen flex items-center sm:items-end overflow-hidden bg-navy">
             {/* full-bleed background image */}
             <img
               src={heroImg}
@@ -54,11 +54,12 @@ function ProductsIndex() {
               className="absolute inset-0 h-full w-full object-cover object-center"
             />
             {/* gradient overlay — heavy at bottom for text legibility */}
-            <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/35 to-navy/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/35 to-navy/10 sm:from-navy/85 sm:via-navy/35 sm:to-navy/10" />
+            <div className="absolute inset-0 bg-navy/20 sm:hidden" /> {/* Extra darkening for centered mobile text */}
 
-            {/* content anchored to bottom */}
-            <div className="relative w-full px-6 pb-14 lg:px-12 lg:pb-16">
-              <div className="mx-auto max-w-7xl">
+            {/* content anchored to bottom on desktop, centered on mobile */}
+            <div className="relative w-full px-6 pb-0 sm:pb-14 lg:px-12 lg:pb-16">
+              <div className="mx-auto max-w-7xl flex flex-col items-center text-center sm:items-start sm:text-left">
                 <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-gold/80">
                   Our Collection
                 </div>
@@ -68,7 +69,7 @@ function ProductsIndex() {
                   <span className="italic text-gold">Forty objects.</span>
                 </h1>
                 <div className="mt-5 h-px w-10 bg-gold/50" />
-                <div className="mt-5 flex items-end gap-6">
+                <div className="mt-5 flex items-center justify-center sm:justify-start gap-6">
                   <p className="max-w-sm text-sm leading-relaxed text-white/65">
                     Each room is its own page — open the one that fits
                     the brief, or tell us the occasion and we'll compose a set.

@@ -1,6 +1,6 @@
 import { Star, PenTool, Package, Truck } from "lucide-react";
 import { motion } from "framer-motion";
-import why from "@/assets/imag1.webp";
+import why from "@/assets/image1.jpeg";
 
 const features = [
   { icon: Star, t: "Uncompromising Quality", d: "Every product is carefully sourced, inspected, and finished to meet the highest standards." },
@@ -35,12 +35,12 @@ export function WhyUs() {
             viewport={{ once: true, margin: "-10% 0px" }}
             transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
           >
-            <div className="group relative overflow-hidden rounded-[2rem] aspect-[4/5] sm:aspect-square">
+            <div className="group relative overflow-hidden rounded-[2rem]">
               <img
                 src={why}
                 alt="Hands wrapping a navy gift box with gold ribbon"
                 loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                className="h-auto w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
               />
               {/* Subtle gold overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-gold/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
