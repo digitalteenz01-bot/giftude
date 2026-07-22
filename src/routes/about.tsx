@@ -204,9 +204,28 @@ function OurStory() {
 
             <div className="mt-8 space-y-5 text-sm leading-relaxed text-navy/70">
               <p>
-                Giftitude is a Canadian corporate gifting company dedicated to helping
-                businesses build stronger relationships through thoughtfully curated
-                premium gifts.
+                Giftitude creates premium corporate gifting experiences that inspire appreciation, strengthen relationships, and showcase your brand with sophistication. Our exclusive collection features meticulously crafted gift sets, drinkware, tech essentials, and lifestyle accessories, carefully selected to meet the highest standards of quality, functionality, and presentation.
+              </p>
+              <p>
+                Our goal is simple — to help organizations strengthen relationships, celebrate achievements, and enhance their brand through meaningful gifting experiences. Whether you require a single premium executive gift or thousands of customized promotional products, Giftitude delivers dependable service, competitive pricing, and on-time delivery.
+              </p>
+              <p>
+                Giftitude was born from a simple observation: corporate gifting
+                had lost its soul. Too often, it was an afterthought—a catalogue
+                of generic items stamped with a logo, given out of obligation rather
+                than genuine appreciation.
+              </p>
+              <p>
+                We set out to change that. We believe that a gift from a company
+                should carry the same weight, thoughtfulness, and delight as a gift
+                from a friend. It should be an object of beauty, utility, and lasting
+                value.
+              </p>
+              <p>
+                Today, our studio works with some of Canada's most discerning brands
+                to compose gifting experiences that elevate relationships. From
+                small-batch executive sets to company-wide festive curations, we
+                bring an obsessive attention to detail to every project. We don't just supply products; we curate artifacts that tell your brand's story.
               </p>
             </div>
           </div>
